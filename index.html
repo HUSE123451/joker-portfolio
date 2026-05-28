@@ -609,7 +609,7 @@ footer {
     </p>
   </div>
   <div class="hero-image-area">
-    <img src="images/hero-joker-new4.jpg" alt="Joker 雨宫莲" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+    <img loading="lazy" src="images/hero-joker-new4.jpg" alt="Joker 雨宫莲" style="width:100%;height:100%;object-fit:cover;object-position:top;">
   </div>
   <div class="hero-scroll">
     <span>Scroll</span>
@@ -622,7 +622,7 @@ footer {
   <div class="about-left reveal">
     <div class="about-red-accent"></div>
     <div class="about-image-block">
-      <img src="images/about-joker.jpg" alt="Joker 特写" style="width:100%;height:100%;object-fit:cover;">
+      <img loading="lazy" src="images/about-joker.jpg" alt="Joker 特写" style="width:100%;height:100%;object-fit:cover;">
     </div>
   </div>
   <div class="about-right reveal">
@@ -665,7 +665,7 @@ footer {
   <div class="works-grid">
     <div class="work-card reveal">
       <div class="work-card-inner" style="padding:0;">
-        <img src="images/work-01.jpg" alt="战斗姿态" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="images/work-01.jpg" alt="战斗姿态" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="work-overlay">
         <h3>战斗姿态</h3>
@@ -674,7 +674,7 @@ footer {
     </div>
     <div class="work-card reveal">
       <div class="work-card-inner" style="padding:0;">
-        <img src="images/work-02.jpg" alt="Persona 觉醒" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="images/work-02.jpg" alt="Persona 觉醒" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="work-overlay">
         <h3>Persona 觉醒</h3>
@@ -683,7 +683,7 @@ footer {
     </div>
     <div class="work-card reveal">
       <div class="work-card-inner" style="padding:0;">
-        <img src="images/work-03.jpg" alt="暗夜潜行" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="images/work-03.jpg" alt="暗夜潜行" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="work-overlay">
         <h3>暗夜潜行</h3>
@@ -692,7 +692,7 @@ footer {
     </div>
     <div class="work-card reveal">
       <div class="work-card-inner" style="padding:0;">
-        <img src="images/work-04.jpg" alt="总攻击" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="images/work-04.jpg" alt="总攻击" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="work-overlay">
         <h3>All-Out Attack</h3>
@@ -701,7 +701,7 @@ footer {
     </div>
     <div class="work-card reveal">
       <div class="work-card-inner" style="padding:0;">
-        <img src="images/work-05.jpg" alt="日常形态" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="images/work-05.jpg" alt="日常形态" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="work-overlay">
         <h3>高中生莲</h3>
@@ -710,7 +710,7 @@ footer {
     </div>
     <div class="work-card reveal">
       <div class="work-card-inner" style="padding:0;">
-        <img src="images/work-06.png" alt="Wildcard" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="images/work-06.jpg" alt="Wildcard" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="work-overlay">
         <h3>Wildcard</h3>
@@ -791,7 +791,7 @@ footer {
         <div class="skill-desc">融合不同Persona创造更强大的存在</div>
       </div>
     </div>
-    <div class="skill-card reveal" style="background-image: url('images/work-06.png'); background-size: cover; background-position: center;">
+    <div class="skill-card reveal" style="background-image: url('images/work-06.jpg'); background-size: cover; background-position: center;">
       <div class="skill-overlay"></div>
       <div class="skill-content">
         <div class="skill-number">08</div>
@@ -929,10 +929,12 @@ let audioContext = null;
 let analyser = null;
 let dataArray = null;
 
-// Create audio element (same as working test page)
-const bgm = new Audio('audio/Life%20Will%20Change%20bgm-%E7%9B%AE%E9%BB%92%E5%B0%86%E5%8F%B8.mp3');
+// Create audio element with lazy loading
+const bgm = new Audio();
 bgm.volume = 0.8;
 bgm.loop = true;
+bgm.preload = 'none'; // Don't preload until user clicks
+bgm.src = 'audio/bgm.mp3';
 
 // Audio file error handling
 bgm.addEventListener('error', (e) => {
