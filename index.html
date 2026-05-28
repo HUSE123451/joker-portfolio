@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOKER — 雨宫莲 | Portfolio</title>
+<style>
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --red: #e60012;
+  --dark-red: #b8000e;
+  --black: #0a0a0a;
+  --dark: #111111;
+  --gray: #1a1a1a;
+  --light-gray: #2a2a2a;
+  --white: #f5f5f5;
+  --pure-white: #ffffff;
+  --font-main: 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-mono: 'Consolas', 'Courier New', monospace;
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-main);
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ========== CUSTOM CURSOR ========== */
+.cursor {
+  width: 20px; height: 20px;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, background 0.15s ease;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+.cursor.hover {
+  transform: translate(-50%, -50%) scale(2.5);
+  background: var(--red);
+  border-color: var(--red);
+}
+.cursor-dot {
+  width: 4px; height: 4px;
+  background: var(--pure-white);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+/* ========== NAVIGATION ========== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+.nav-logo {
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.nav-logo span { color: var(--red); }
+.nav-links { display: flex; gap: 2.5rem; }
+.nav-links a {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--red);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after { width: 100%; }
+
+/* ========== HERO SECTION ========== */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-bg-block {
+  position: absolute;
+  top: -10%; right: -5%;
+  width: 55%; height: 120%;
+  background: var(--red);
+  transform: skewX(-8deg);
+  z-index: 1;
+  opacity: 0;
+  animation: slideInRight 1s ease 0.3s forwards;
+}
+.hero-diagonal {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 80px,
+    rgba(230, 0, 18, 0.03) 80px,
+    rgba(230, 0, 18, 0.03) 82px
+  );
+  z-index: 2;
+}
+.hero-content {
+  position: relative;
+  z-index: 3;
+  padding: 0 8vw;
+  max-width: 100%;
+}
+.hero-subtitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.6s forwards;
+}
+.hero-title {
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.8s forwards;
+}
+.hero-title .outline {
+  -webkit-text-stroke: 2px var(--white);
+  color: transparent;
+}
+.hero-title .accent { color: var(--red); }
+.hero-desc {
+  margin-top: 2rem;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  max-width: 400px;
+  color: rgba(245, 245, 245, 0.6);
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1s forwards;
+}
+.hero-image-area {
+  position: absolute;
+  right: 8vw;
+  bottom: 10vh;
+  width: 35vw;
+  max-width: 500px;
+  aspect-ratio: 3/4;
+  z-index: 4;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.2s forwards;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1.5s forwards;
+}
+.hero-scroll span {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+.hero-scroll .line {
+  width: 1px; height: 40px;
+  background: var(--red);
+  animation: scrollLine 1.5s ease infinite;
+}
+
+/* ========== SECTION COMMON ========== */
+section { position: relative; }
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* ========== ABOUT SECTION ========== */
+.about {
+  padding: 10rem 8vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  min-height: 100vh;
+}
+.about-left { position: relative; }
+.about-image-block {
+  width: 100%;
+  aspect-ratio: 4/5;
+  background: var(--gray);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.about-red-accent {
+  position: absolute;
+  top: -2rem; left: -2rem;
+  width: 120px; height: 120px;
+  background: var(--red);
+  z-index: -1;
+}
+.about-right .section-title { margin-bottom: 2rem; }
+.about-text {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: rgba(245, 245, 245, 0.65);
+  margin-bottom: 2rem;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.stat-item { text-align: center; }
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  opacity: 0.5;
+}
+
+/* ========== WORKS SECTION ========== */
+.works {
+  padding: 8rem 0;
+  background: var(--dark);
+}
+.works-header {
+  padding: 0 8vw;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.work-card {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  cursor: none;
+}
+.work-card-inner {
+  width: 100%; height: 100%;
+  background: var(--gray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+.work-card:hover .work-card-inner { transform: scale(1.05); }
+.work-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem;
+  background: linear-gradient(transparent, rgba(10,10,10,0.95));
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.work-card:hover .work-overlay { transform: translateY(0); }
+.work-overlay h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3rem;
+}
+.work-overlay p {
+  font-size: 0.7rem;
+  color: var(--red);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+/* Red accent on alternating cards */
+.work-card:nth-child(2)::after,
+.work-card:nth-child(5)::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: var(--red);
+  z-index: 5;
+}
+
+/* ========== MARQUEE ========== */
+.marquee-section {
+  padding: 3rem 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(245,245,245,0.05);
+  border-bottom: 1px solid rgba(245,245,245,0.05);
+}
+.marquee-track {
+  display: flex;
+  animation: marquee 20s linear infinite;
+  white-space: nowrap;
+}
+.marquee-item {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 2rem;
+  color: rgba(245,245,245,0.08);
+  flex-shrink: 0;
+}
+.marquee-item .dot {
+  display: inline-block;
+  width: 12px; height: 12px;
+  background: var(--red);
+  border-radius: 50%;
+  margin: 0 1.5rem;
+  vertical-align: middle;
+}
+
+/* ========== SKILLS SECTION ========== */
+.skills {
+  padding: 10rem 8vw;
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 4rem;
+}
+.skill-card {
+  padding: 0;
+  background: var(--gray);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease;
+  aspect-ratio: 1;
+}
+.skill-card:hover { transform: scale(1.02); }
+.skill-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.6) 100%);
+  transition: background 0.4s ease;
+}
+.skill-card:hover .skill-overlay {
+  background: linear-gradient(135deg, rgba(230,0,18,0.8) 0%, rgba(184,0,14,0.6) 100%);
+}
+.skill-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  z-index: 3;
+}
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-number {
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgba(245,245,245,0.08);
+  margin-bottom: 1rem;
+  transition: color 0.4s ease;
+}
+.skill-card:hover .skill-number { color: rgba(255,255,255,0.3); }
+.skill-name {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+.skill-desc {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+/* ========== CONTACT SECTION ========== */
+.contact {
+  padding: 10rem 8vw;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.contact-bg-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(6rem, 18vw, 16rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(245,245,245,0.02);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: -0.05em;
+}
+.contact-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+.contact .section-title { margin-bottom: 1.5rem; }
+.contact-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(245,245,245,0.5);
+  margin-bottom: 3rem;
+}
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(245,245,245,0.1);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.contact-link:hover {
+  color: var(--red);
+  border-color: var(--red);
+}
+.contact-link .arrow {
+  transition: transform 0.3s ease;
+}
+.contact-link:hover .arrow { transform: translateX(8px); }
+
+/* ========== FOOTER ========== */
+footer {
+  padding: 2rem 8vw;
+  border-top: 1px solid rgba(245,245,245,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  color: rgba(245,245,245,0.3);
+  letter-spacing: 0.1em;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes slideInRight {
+  from { opacity: 0; transform: skewX(-8deg) translateX(100px); }
+  to { opacity: 1; transform: skewX(-8deg) translateX(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .about { grid-template-columns: 1fr; gap: 3rem; padding: 6rem 6vw; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .works-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-image-area { display: none; }
+}
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.5rem; }
+  .hero-content { padding: 0 6vw; }
+  .about { padding: 5rem 6vw; }
+  .about-stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .works-grid { grid-template-columns: 1fr 1fr; }
+  .contact { padding: 6rem 6vw; }
+  .cursor, .cursor-dot { display: none; }
+  body { cursor: auto; }
+}
+@media (max-width: 480px) {
+  .skills-grid { grid-template-columns: 1fr; }
+  .works-grid { grid-template-columns: 1fr; }
+  .nav-links a { font-size: 0.65rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- Audio will be created by JavaScript -->
+
+<!-- Audio Control Button -->
+<button id="audioToggle" style="position:fixed;bottom:2rem;right:2rem;z-index:1001;width:50px;height:50px;border-radius:50%;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity 0.3s ease;box-shadow:0 4px 20px rgba(230,0,18,0.4);">
+  <svg id="audioIcon" width="20" height="20" viewBox="0 0 24 24" fill="white">
+    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+  </svg>
+</button>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-logo">J<span>.</span>Portfolio</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#works">Works</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+  <div class="hero-bg-block"></div>
+  <div class="hero-diagonal"></div>
+  <div class="hero-content">
+    <p class="hero-subtitle">Persona 5X — Phantom Thief</p>
+    <h1 class="hero-title">
+      <span class="outline">雨宫</span><br>
+      <span class="accent">莲</span>
+    </h1>
+    <p class="hero-desc">
+      暗夜中觉醒的灵魂，以假面之姿对抗扭曲的欲望。<br>
+      Let justice shine upon this distorted world.
+    </p>
+  </div>
+  <div class="hero-image-area">
+    <img src="images/hero-joker-new4.jpg" alt="Joker 雨宫莲" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-left reveal">
+    <div class="about-red-accent"></div>
+    <div class="about-image-block">
+      <img src="images/about-joker.jpg" alt="Joker 特写" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+  </div>
+  <div class="about-right reveal">
+    <p class="section-label">// About</p>
+    <h2 class="section-title">怪盗团的<br>核心成员</h2>
+    <p class="about-text">
+      作为心之怪盗团的领袖，雨宫莲以「Joker」之名在认知世界中行动。
+      拥有多面人格的力量，能够自如切换不同的Persona，在战斗中展现出无与伦比的适应能力。
+    </p>
+    <p class="about-text">
+      他的故事是关于正义、友谊与觉醒——在被社会贴上"问题少年"的标签后，
+      他选择用行动证明：真正的正义不在于服从，而在于反抗不公。
+    </p>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-number" data-count="12">0</div>
+        <div class="stat-label">Persona</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="8">0</div>
+        <div class="stat-label">怪盗成员</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-count="100">0</div>
+        <div class="stat-label">正义值</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Works Section -->
+<section class="works" id="works">
+  <div class="works-header reveal">
+    <div>
+      <p class="section-label">// Gallery</p>
+      <h2 class="section-title">作品展示</h2>
+    </div>
+    <p style="font-size:0.75rem; opacity:0.4; letter-spacing:0.15em;">6 WORKS</p>
+  </div>
+  <div class="works-grid">
+    <div class="work-card reveal">
+      <div class="work-card-inner" style="padding:0;">
+        <img src="images/work-01.jpg" alt="战斗姿态" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="work-overlay">
+        <h3>战斗姿态</h3>
+        <p>Combat Pose</p>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-card-inner" style="padding:0;">
+        <img src="images/work-02.jpg" alt="Persona 觉醒" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="work-overlay">
+        <h3>Persona 觉醒</h3>
+        <p>Awakening</p>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-card-inner" style="padding:0;">
+        <img src="images/work-03.jpg" alt="暗夜潜行" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="work-overlay">
+        <h3>暗夜潜行</h3>
+        <p>Night Operation</p>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-card-inner" style="padding:0;">
+        <img src="images/work-04.jpg" alt="总攻击" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="work-overlay">
+        <h3>All-Out Attack</h3>
+        <p>总攻击演出</p>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-card-inner" style="padding:0;">
+        <img src="images/work-05.jpg" alt="日常形态" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="work-overlay">
+        <h3>高中生莲</h3>
+        <p>Daily Life</p>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-card-inner" style="padding:0;">
+        <img src="images/work-06.png" alt="Wildcard" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="work-overlay">
+        <h3>Wildcard</h3>
+        <p>命运之牌</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">雨宫莲 <span class="dot"></span> JOKER <span class="dot"></span> PHANTOM THIEF <span class="dot"></span> PERSONA <span class="dot"></span> 怪盗团 <span class="dot"></span> WILDCARD</span>
+    <span class="marquee-item">雨宫莲 <span class="dot"></span> JOKER <span class="dot"></span> PHANTOM THIEF <span class="dot"></span> PERSONA <span class="dot"></span> 怪盗团 <span class="dot"></span> WILDCARD</span>
+  </div>
+</div>
+
+<!-- Skills Section -->
+<section class="skills" id="skills">
+  <div class="reveal">
+    <p class="section-label">// Abilities</p>
+    <h2 class="section-title">能力概览</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal" style="background-image: url('images/hero-joker-new4.jpg'); background-size: cover; background-position: center;">
+      <div class="skill-overlay"></div>
+      <div class="skill-content">
+        <div class="skill-number">01</div>
+        <div class="skill-name">Persona 召唤</div>
+        <div class="skill-desc">多Persona切换战斗，Wildcard的独有能力</div>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="background-image: url('images/about-joker.jpg'); background-size: cover; background-position: center;">
+      <div class="skill-overlay"></div>
+      <div class="skill-content">
+        <div class="skill-number">02</div>
+        <div class="skill-name">潜入认知</div>
+        <div class="skill-desc">深入扭曲欲望构成的异世界宫殿</div>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="background-image: url('images/work-01.jpg'); background-size: cover; background-position: center;">
+      <div class="skill-overlay"></div>
+      <div class="skill-content">
+        <div class="skill-number">03</div>
+        <div class="skill-name">怪盗行动</div>
+        <div class="skill-desc">精密策划并执行心灵盗窃作战</div>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="background-image: url('images/work-02.jpg'); background-size: cover; background-position: center;">
+      <div class="skill-overlay"></div>
+      <div class="skill-content">
+        <div class="skill-number">04</div>
+        <div class="skill-name">羁绊之力</div>
+        <div class="skill-desc">通过Confidant羁绊解锁更强大的力量</div>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="background-image: url('images/work-03.jpg'); background-size: cover; background-position: center;">
+      <div class="skill-overlay"></div>
+      <div class="skill-content">
+        <div class="skill-number">05</div>
+        <div class="skill-name">枪弹齐射</div>
+        <div class="skill-desc">精准射击与近战格斗的完美结合</div>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="background-image: url('images/work-04.jpg'); background-size: cover; background-position: center;">
+      <div class="skill-overlay"></div>
+      <div class="skill-content">
+        <div class="skill-number">06</div>
+        <div class="skill-name">弱点打击</div>
+        <div class="skill-desc">精准识别敌人弱点，一击制胜</div>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="background-image: url('images/work-05.jpg'); background-size: cover; background-position: center;">
+      <div class="skill-overlay"></div>
+      <div class="skill-content">
+        <div class="skill-number">07</div>
+        <div class="skill-name">面具融合</div>
+        <div class="skill-desc">融合不同Persona创造更强大的存在</div>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="background-image: url('images/work-06.png'); background-size: cover; background-position: center;">
+      <div class="skill-overlay"></div>
+      <div class="skill-content">
+        <div class="skill-number">08</div>
+        <div class="skill-name">首领指挥</div>
+        <div class="skill-desc">统领怪盗团，制定完美战术策略</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-bg-text">CONTACT</div>
+  <div class="contact-content reveal">
+    <p class="section-label">// Get in Touch</p>
+    <h2 class="section-title">发出预告信</h2>
+    <p class="contact-text">
+      如果你也相信正义不会缺席，欢迎通过以下方式联系。<br>
+      怪盗团随时待命。
+    </p>
+    <div class="contact-links">
+      <a href="mailto:joker@phantom.thieves" class="contact-link">
+        <span class="arrow">→</span>
+        <span>joker@phantom.thieves</span>
+      </a>
+      <a href="#" class="contact-link">
+        <span class="arrow">→</span>
+        <span>Twitter / X — @Joker_P5X</span>
+      </a>
+      <a href="#" class="contact-link">
+        <span class="arrow">→</span>
+        <span>Bilibili — 雨宫莲Official</span>
+      </a>
+      <a href="#" class="contact-link">
+        <span class="arrow">→</span>
+        <span>Pixiv — 作品集</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <span>© 2026 JOKER — 雨宫莲 Portfolio</span>
+  <span>PERSONA 5X FAN PROJECT</span>
+</footer>
+
+<script>
+// Custom Cursor
+const cursor = document.getElementById('cursor');
+const cursorDot = document.getElementById('cursorDot');
+let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursorDot.style.left = mouseX + 'px';
+  cursorDot.style.top = mouseY + 'px';
+});
+
+function animateCursor() {
+  cursorX += (mouseX - cursorX) * 0.15;
+  cursorY += (mouseY - cursorY) * 0.15;
+  cursor.style.left = cursorX + 'px';
+  cursor.style.top = cursorY + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Hover effect on interactive elements
+document.querySelectorAll('a, .work-card, .skill-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
+// Scroll Reveal
+const revealElements = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+revealElements.forEach(el => observer.observe(el));
+
+// Counter Animation
+const counters = document.querySelectorAll('.stat-number[data-count]');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const target = parseInt(entry.target.dataset.count);
+      let current = 0;
+      const increment = target / 40;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          entry.target.textContent = target;
+          clearInterval(timer);
+        } else {
+          entry.target.textContent = Math.floor(current);
+        }
+      }, 30);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+counters.forEach(c => counterObserver.observe(c));
+
+// Smooth scroll for nav links
+document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Parallax on hero background block
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const heroBlock = document.querySelector('.hero-bg-block');
+  if (heroBlock && scrollY < window.innerHeight) {
+    heroBlock.style.transform = `skewX(-8deg) translateY(${scrollY * 0.1}px)`;
+  }
+});
+
+// Audio Control
+const audioToggle = document.getElementById('audioToggle');
+const audioIcon = document.getElementById('audioIcon');
+let isPlaying = false;
+let audioContext = null;
+let analyser = null;
+let dataArray = null;
+
+// Create audio element (same as working test page)
+const bgm = new Audio('audio/Life%20Will%20Change%20bgm-%E7%9B%AE%E9%BB%92%E5%B0%86%E5%8F%B8.mp3');
+bgm.volume = 0.8;
+bgm.loop = true;
+
+// Audio file error handling
+bgm.addEventListener('error', (e) => {
+  console.error('Audio error:', e.target.error);
+  audioToggle.style.background = '#666';
+  audioToggle.title = '音频加载失败';
+});
+
+bgm.addEventListener('canplaythrough', () => {
+  console.log('Audio file loaded');
+  audioToggle.title = '点击播放音乐';
+});
+
+// Initialize Web Audio API for beat detection
+function initAudioContext() {
+  if (audioContext) return;
+  try {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+    const bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
+
+    const source = audioContext.createMediaElementSource(bgm);
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+  } catch (e) {
+    console.error('Web Audio API init error:', e);
+  }
+}
+
+// Update button icon
+function updateAudioIcon() {
+  if (isPlaying) {
+    audioIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+  } else {
+    audioIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+  }
+}
+
+// Play audio
+function playAudio() {
+  if (isPlaying) return;
+
+  bgm.play().then(() => {
+    isPlaying = true;
+    updateAudioIcon();
+    initAudioContext();
+    animateCursorBeat();
+  }).catch((e) => {
+    console.error('Play failed:', e);
+  });
+}
+
+// Pause audio
+function pauseAudio() {
+  if (!isPlaying) return;
+
+  bgm.pause();
+  isPlaying = false;
+  updateAudioIcon();
+}
+
+// Toggle on button click
+audioToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (isPlaying) {
+    pauseAudio();
+  } else {
+    playAudio();
+  }
+});
+
+// Auto-play on first page interaction
+let hasInteracted = false;
+document.addEventListener('click', () => {
+  if (!hasInteracted) {
+    hasInteracted = true;
+    playAudio();
+  }
+});
+
+// Cursor beat animation
+function animateCursorBeat() {
+  if (!isPlaying || !analyser) return;
+
+  analyser.getByteFrequencyData(dataArray);
+
+  // Calculate average frequency
+  let sum = 0;
+  for (let i = 0; i < dataArray.length; i++) {
+    sum += dataArray[i];
+  }
+  const average = sum / dataArray.length;
+
+  // Map to cursor scale (1.0 to 2.5)
+  const scale = 1.0 + (average / 255) * 1.5;
+
+  // Apply to cursor
+  const cursorEl = document.getElementById('cursor');
+  if (cursorEl) {
+    cursorEl.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    // Add red glow effect based on beat intensity
+    const glowIntensity = Math.floor((average / 255) * 30);
+    cursorEl.style.boxShadow = `0 0 ${glowIntensity}px rgba(230, 0, 18, ${average / 255})`;
+  }
+
+  requestAnimationFrame(animateCursorBeat);
+}
+</script>
+</body>
+</html>
