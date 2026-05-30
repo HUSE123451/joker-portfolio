@@ -2,1048 +2,543 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JOKER — 雨宫莲 | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>JOKER — 雨宫莲 | P5X Portfolio</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎭</text></svg>">
+<link rel="preload" href="images/hero-joker-new1.jpg" as="image">
 <style>
-/* ========== RESET & BASE ========== */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --red: #e60012;
-  --dark-red: #b8000e;
-  --black: #0a0a0a;
-  --dark: #111111;
-  --gray: #1a1a1a;
-  --light-gray: #2a2a2a;
-  --white: #f5f5f5;
-  --pure-white: #ffffff;
-  --font-main: 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
-  --font-mono: 'Consolas', 'Courier New', monospace;
-}
-html { scroll-behavior: smooth; font-size: 16px; }
-body {
-  font-family: var(--font-main);
-  background: var(--black);
-  color: var(--white);
-  overflow-x: hidden;
-  cursor: none;
-}
-a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; }
+/* ═══════════ RESET ═══════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--red:#e60012;--dark-red:#b8000e;--black:#0a0a0a;--dark:#111;--gray:#1a1a1a;--white:#f5f5f5;--pure-white:#fff;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'Segoe UI','Microsoft YaHei',system-ui,sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
 
-/* ========== CUSTOM CURSOR ========== */
-.cursor {
-  width: 20px; height: 20px;
-  border: 2px solid var(--red);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.15s ease, background 0.15s ease;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-}
-.cursor.hover {
-  transform: translate(-50%, -50%) scale(2.5);
-  background: var(--red);
-  border-color: var(--red);
-}
-.cursor-dot {
-  width: 4px; height: 4px;
-  background: var(--pure-white);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-}
+/* ═══════════ SCROLLBAR ═══════════ */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px;}
+*{scrollbar-width:thin;scrollbar-color:var(--red) var(--black);}
 
-/* ========== NAVIGATION ========== */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  padding: 1.5rem 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  mix-blend-mode: difference;
-}
-.nav-logo {
-  font-size: 1.2rem;
-  font-weight: 900;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-}
-.nav-logo span { color: var(--red); }
-.nav-links { display: flex; gap: 2.5rem; }
-.nav-links a {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  position: relative;
-  padding-bottom: 4px;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 0; height: 2px;
-  background: var(--red);
-  transition: width 0.3s ease;
-}
-.nav-links a:hover::after { width: 100%; }
+/* ═══════════ NAV ═══════════ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:difference;transition:all .3s;}
+.nav.scrolled{background:rgba(0,0,0,.92);backdrop-filter:blur(12px);mix-blend-mode:normal;padding:.6rem 3rem;box-shadow:0 2px 20px rgba(230,0,18,.1);}
+.nav-logo{font-size:1.4rem;font-weight:900;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;}
+.nav-logo span{color:var(--red);}
+.nav-list{display:flex;gap:.5rem;list-style:none;}
+.nav-list li{padding:.5rem 1rem;}
+.nav-list a{font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;position:relative;transition:color .3s;}
+.nav-list a::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.nav-list a:hover,.nav-list a.active{color:var(--red);}
+.nav-list a:hover::after,.nav-list a.active::after{transform:scaleX(1);}
 
-/* ========== HERO SECTION ========== */
-.hero {
-  height: 100vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-.hero-bg-block {
-  position: absolute;
-  top: -10%; right: -5%;
-  width: 55%; height: 120%;
-  background: var(--red);
-  transform: skewX(-8deg);
-  z-index: 1;
-  opacity: 0;
-  animation: slideInRight 1s ease 0.3s forwards;
-}
-.hero-diagonal {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 80px,
-    rgba(230, 0, 18, 0.03) 80px,
-    rgba(230, 0, 18, 0.03) 82px
-  );
-  z-index: 2;
-}
-.hero-content {
-  position: relative;
-  z-index: 3;
-  padding: 0 8vw;
-  max-width: 100%;
-}
-.hero-subtitle {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.6s forwards;
-}
-.hero-title {
-  font-size: clamp(4rem, 12vw, 10rem);
-  font-weight: 900;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.8s forwards;
-}
-.hero-title .outline {
-  -webkit-text-stroke: 2px var(--white);
-  color: transparent;
-}
-.hero-title .accent { color: var(--red); }
-.hero-desc {
-  margin-top: 2rem;
-  font-size: 1rem;
-  font-weight: 300;
-  line-height: 1.8;
-  max-width: 400px;
-  color: rgba(245, 245, 245, 0.6);
-  opacity: 0;
-  animation: fadeUp 0.8s ease 1s forwards;
-}
-.hero-image-area {
-  position: absolute;
-  right: 8vw;
-  bottom: 10vh;
-  width: 35vw;
-  max-width: 500px;
-  aspect-ratio: 3/4;
-  z-index: 4;
-  opacity: 0;
-  animation: fadeUp 1s ease 1.2s forwards;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-}
-.hero-scroll {
-  position: absolute;
-  bottom: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 1.5s forwards;
-}
-.hero-scroll span {
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  writing-mode: vertical-rl;
-}
-.hero-scroll .line {
-  width: 1px; height: 40px;
-  background: var(--red);
-  animation: scrollLine 1.5s ease infinite;
-}
+/* ═══════════ HAMBURGER ═══════════ */
+.nav-hamburger{display:none;width:30px;height:24px;flex-direction:column;justify-content:space-between;cursor:pointer;}
+.nav-hamburger span{display:block;width:100%;height:2px;background:#fff;transition:all .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(11px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-11px) rotate(-45deg);}
 
-/* ========== SECTION COMMON ========== */
-section { position: relative; }
-.section-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 1rem;
-}
-.section-title {
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+/* ═══════════ P5 MENU ═══════════ */
+.p5-menu{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.97);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .5s cubic-bezier(.16,1,.3,1);}
+.p5-menu.open{opacity:1;visibility:visible;}
+.p5-menu-close{position:absolute;top:2rem;right:2rem;width:50px;height:50px;cursor:pointer;}
+.p5-menu-close::before,.p5-menu-close::after{content:'';position:absolute;top:50%;left:50%;width:30px;height:2px;background:var(--red);transition:transform .3s;}
+.p5-menu-close::before{transform:translate(-50%,-50%) rotate(45deg);}
+.p5-menu-close::after{transform:translate(-50%,-50%) rotate(-45deg);}
+.p5-menu-close:hover::before{transform:translate(-50%,-50%) rotate(135deg);}
+.p5-menu-close:hover::after{transform:translate(-50%,-50%) rotate(45deg);}
+.p5-menu-items{text-align:center;}
+.p5-menu-item{font-size:clamp(2rem,6vw,4rem);font-weight:900;text-transform:uppercase;letter-spacing:.1em;padding:.8rem 2rem;cursor:pointer;transition:all .3s;color:var(--white);opacity:0;transform:translateX(-30px);}
+.p5-menu.open .p5-menu-item{opacity:1;transform:translateX(0);}
+.p5-menu.open .p5-menu-item:nth-child(1){transition-delay:.1s;}
+.p5-menu.open .p5-menu-item:nth-child(2){transition-delay:.15s;}
+.p5-menu.open .p5-menu-item:nth-child(3){transition-delay:.2s;}
+.p5-menu.open .p5-menu-item:nth-child(4){transition-delay:.25s;}
+.p5-menu.open .p5-menu-item:nth-child(5){transition-delay:.3s;}
+.p5-menu.open .p5-menu-item:nth-child(6){transition-delay:.35s;}
+.p5-menu-item:hover{color:var(--red);transform:translateX(20px);}
+
+/* ═══════════ LOADING ═══════════ */
+.loading{position:fixed;inset:0;background:#000;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s;}
+.loading-ring{position:relative;width:80px;height:80px;margin-bottom:2rem;}
+.loading-ring span{position:absolute;inset:0;border:2px solid transparent;border-top-color:var(--red);border-radius:50%;animation:spin 1.2s linear infinite;}
+.loading-ring span:nth-child(2){inset:8px;animation-duration:2s;border-top-color:rgba(230,0,18,.5);}
+.loading-ring span:nth-child(3){inset:16px;animation-duration:3s;border-top-color:rgba(230,0,18,.3);}
+.loading-text{font-size:.9rem;letter-spacing:.5em;text-transform:uppercase;color:var(--red);}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ═══════════ HERO ═══════════ */
+.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(.4);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.8),rgba(0,0,0,.3) 50%,rgba(230,0,18,.1));z-index:1;}
+.hero-content{position:relative;z-index:2;padding:0 8vw;max-width:600px;}
+.hero-label{font-size:.75rem;font-weight:600;letter-spacing:.5em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;}
+.hero-title{font-size:clamp(3rem,10vw,7rem);font-weight:900;line-height:.95;text-transform:uppercase;}
+.hero-title .outline{-webkit-text-stroke:2px var(--white);color:transparent;}
+.hero-title .red{color:var(--red);}
+.hero-subtitle{font-size:1.2rem;font-weight:300;color:rgba(245,245,245,.6);margin-top:1rem;letter-spacing:.1em;}
+.hero-desc{font-size:.9rem;line-height:1.8;color:rgba(245,245,245,.5);margin-top:1.5rem;}
+.hero-tags{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;}
+.tag{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .8rem;background:rgba(230,0,18,.12);border:1px solid rgba(230,0,18,.35);font-size:.7rem;font-weight:600;letter-spacing:.1em;transition:all .3s;}
+.tag:hover{background:rgba(230,0,18,.25);border-color:var(--red);transform:translateY(-2px);}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:bounce 2s ease-in-out infinite;}
+.hero-scroll span{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,245,245,.4);}
+.hero-scroll .line{width:1px;height:30px;background:linear-gradient(180deg,var(--red),transparent);}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ═══════════ SECTION ═══════════ */
+.section{position:relative;padding:5rem 0;}
+.section-inner{padding:0 8vw;}
+.section-label{font-size:.65rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem;}
+.section-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;line-height:1.1;letter-spacing:-.02em;}
+.section-title .red{color:var(--red);}
+.section-desc{font-size:.85rem;line-height:1.8;color:rgba(245,245,245,.5);margin-top:1rem;max-width:500px;}
+
+/* ═══════════ ABOUT ═══════════ */
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:center;margin-top:2.5rem;}
+.about-image{position:relative;}
+.about-image img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:30% top;clip-path:polygon(0 0,calc(100% - 30px) 0,100% 30px,100% 100%,30px 100%,0 calc(100% - 30px));}
+.about-image::after{content:'';position:absolute;top:-8px;left:-8px;width:100%;height:100%;border:2px solid var(--red);clip-path:polygon(0 0,calc(100% - 30px) 0,100% 30px,100% 100%,30px 100%,0 calc(100% - 30px));opacity:.3;z-index:-1;}
+.about-name{font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:.95;text-transform:uppercase;}
+.about-name .red{color:var(--red);}
+.about-role{font-size:.75rem;letter-spacing:.3em;color:var(--red);text-transform:uppercase;margin-top:.5rem;}
+.about-text{font-size:.9rem;line-height:2;color:rgba(245,245,245,.6);margin-top:1.5rem;}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+.stat{text-align:center;padding:1rem;background:rgba(230,0,18,.06);border:1px solid rgba(230,0,18,.15);}
+.stat-num{font-size:1.8rem;font-weight:900;color:var(--red);}
+.stat-label{font-size:.65rem;letter-spacing:.1em;color:rgba(245,245,245,.4);margin-top:.3rem;}
+
+/* ═══════════ GALLERY ═══════════ */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:2rem;}
+.gallery-item{position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .6s cubic-bezier(.16,1,.3,1),filter .4s;filter:brightness(.7);}
+.gallery-item:hover img{transform:scale(1.08);filter:brightness(1);}
+.gallery-item .overlay{position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(transparent,rgba(0,0,0,.9));transform:translateY(100%);transition:transform .4s;}
+.gallery-item:hover .overlay{transform:translateY(0);}
+.gallery-item .overlay .label{font-size:.6rem;letter-spacing:.2em;color:var(--red);text-transform:uppercase;}
+.gallery-item .overlay .title{font-size:.85rem;font-weight:600;margin-top:.2rem;}
+
+/* ═══════════ WORKS ═══════════ */
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+.work-card{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;}
+.work-card img{width:100%;height:100%;object-fit:cover;object-position:center center;transition:transform .6s cubic-bezier(.16,1,.3,1);}
+.work-card:hover img{transform:scale(1.05);}
+.work-card .info{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(transparent,rgba(0,0,0,.9));}
+.work-card .info .num{font-size:2rem;font-weight:900;color:rgba(245,245,245,.1);position:absolute;top:-1rem;right:1rem;}
+.work-card .info .label{font-size:.6rem;letter-spacing:.2em;color:var(--red);text-transform:uppercase;}
+.work-card .info .title{font-size:1rem;font-weight:700;margin-top:.3rem;}
+.work-card .info .desc{font-size:.75rem;color:rgba(245,245,245,.5);margin-top:.3rem;line-height:1.5;}
+
+/* ═══════════ SKILLS ═══════════ */
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem;}
+.skill-card{padding:1.5rem;background:linear-gradient(135deg,rgba(230,0,18,.06),rgba(10,10,10,.95));border:1px solid rgba(230,0,18,.15);border-top:3px solid var(--red);transition:all .3s;}
+.skill-card:hover{border-color:var(--red);transform:translateY(-5px);box-shadow:0 10px 30px rgba(230,0,18,.15);}
+.skill-icon{font-size:1.5rem;margin-bottom:.8rem;}
+.skill-name{font-size:.9rem;font-weight:700;color:var(--red);letter-spacing:.05em;}
+.skill-desc{font-size:.75rem;color:rgba(245,245,245,.5);margin-top:.5rem;line-height:1.6;}
+.skill-bar{margin-top:1rem;height:4px;background:rgba(245,245,245,.1);overflow:hidden;}
+.skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--dark-red),var(--red));transition:width 1s cubic-bezier(.16,1,.3,1);}
+
+/* ═══════════ STATUS ═══════════ */
+.status-panel{background:linear-gradient(180deg,rgba(10,10,10,.95),rgba(230,0,18,.06));border:1px solid rgba(230,0,18,.2);border-top:3px solid var(--red);padding:1.5rem;margin-top:2rem;}
+.status-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(230,0,18,.15);}
+.status-title{font-size:.8rem;font-weight:700;letter-spacing:.2em;color:var(--red);text-transform:uppercase;}
+.status-level{font-size:.7rem;padding:.2rem .6rem;background:var(--red);color:var(--pure-white);font-weight:700;}
+.stat-row{display:flex;justify-content:space-between;font-size:.7rem;letter-spacing:.1em;margin-bottom:.3rem;color:rgba(245,245,245,.6);}
+.stat-track{height:5px;background:rgba(245,245,245,.08);overflow:hidden;margin-bottom:.8rem;}
+.stat-fill{height:100%;background:linear-gradient(90deg,var(--dark-red),var(--red));}
+
+/* ═══════════ DIALOG ═══════════ */
+.dialog{background:linear-gradient(135deg,rgba(230,0,18,.08),rgba(10,10,10,.95));border:2px solid var(--red);padding:1.2rem;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));margin-top:1.5rem;}
+.dialog::after{content:'▶';position:absolute;bottom:.6rem;right:1rem;color:var(--red);font-size:.6rem;animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.dialog-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid rgba(230,0,18,.2);}
+.dialog-avatar{width:32px;height:32px;background:var(--red);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.dialog-name{font-size:.8rem;font-weight:700;letter-spacing:.1em;color:var(--red);}
+.dialog-text{font-size:.8rem;line-height:1.7;color:var(--white);}
+.dialog-text::before{content:'「';color:var(--red);}
+.dialog-text::after{content:'」';color:var(--red);}
+
+/* ═══════════ MARQUEE ═══════════ */
+.marquee{padding:2rem 0;overflow:hidden;border-top:1px solid rgba(245,245,245,.04);border-bottom:1px solid rgba(245,245,245,.04);}
+.marquee-track{display:flex;animation:marquee 30s linear infinite;white-space:nowrap;}
+.marquee-item{font-size:clamp(1.2rem,3vw,2.5rem);font-weight:900;text-transform:uppercase;letter-spacing:.05em;padding:0 2rem;color:rgba(245,245,245,.06);flex-shrink:0;}
+.marquee-item .dot{display:inline-block;width:8px;height:8px;background:var(--red);border-radius:50%;margin:0 1.5rem;vertical-align:middle;opacity:.4;}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════ CONTACT ═══════════ */
+.contact-content{max-width:600px;margin:0 auto;text-align:center;}
+.contact-text{font-size:.9rem;line-height:1.8;color:rgba(245,245,245,.5);margin:1.5rem 0;}
+.contact-links{display:flex;flex-direction:column;gap:0;text-align:left;}
+.contact-link{display:flex;align-items:center;gap:1rem;font-size:.9rem;font-weight:600;letter-spacing:.05em;padding:1rem 0;border-bottom:1px solid rgba(245,245,245,.08);transition:all .3s;}
+.contact-link:hover{color:var(--red);padding-left:.8rem;}
+.contact-link .arrow{transition:transform .3s;}
+.contact-link:hover .arrow{transform:translateX(5px);}
+
+/* ═══════════ FOOTER ═══════════ */
+.footer{padding:1.5rem 8vw;display:flex;justify-content:space-between;align-items:center;font-size:.65rem;color:rgba(245,245,245,.25);letter-spacing:.1em;}
+
+/* ═══════════ REVEAL ═══════════ */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s cubic-bezier(.16,1,.3,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .6s,transform .6s cubic-bezier(.16,1,.3,1);}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .6s,transform .6s cubic-bezier(.16,1,.3,1);}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* ═══════════ BACK TO TOP ═══════════ */
+.back-to-top{position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;background:rgba(230,0,18,.15);border:1px solid rgba(230,0,18,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:999;opacity:0;transform:translateY(20px);transition:all .3s;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);}
+.back-to-top.visible{opacity:1;transform:translateY(0);}
+.back-to-top:hover{background:rgba(230,0,18,.4);transform:translateY(-3px);}
+.back-to-top svg{width:16px;height:16px;fill:var(--red);}
+
+/* ═══════════ LIGHTBOX ═══════════ */
+.lightbox{position:fixed;inset:0;z-index:9990;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s;}
+.lightbox.active{opacity:1;visibility:visible;}
+.lightbox-close{position:absolute;top:2rem;right:2rem;width:40px;height:40px;cursor:pointer;}
+.lightbox-close::before,.lightbox-close::after{content:'';position:absolute;top:50%;left:50%;width:24px;height:2px;background:var(--red);transition:transform .3s;}
+.lightbox-close::before{transform:translate(-50%,-50%) rotate(45deg);}
+.lightbox-close::after{transform:translate(-50%,-50%) rotate(-45deg);}
+.lightbox-img{max-width:90vw;max-height:85vh;object-fit:contain;}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:45px;height:45px;background:rgba(230,0,18,.2);border:1px solid rgba(230,0,18,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;font-size:1.2rem;color:var(--red);}
+.lightbox-nav:hover{background:rgba(230,0,18,.5);}
+.lightbox-prev{left:2rem;}
+.lightbox-next{right:2rem;}
+
+/* ═══════════ SCROLL PROGRESS ═══════════ */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:10001;width:0;transition:width .1s;}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media(max-width:1024px){
+  .about-grid{grid-template-columns:1fr;gap:2rem;}
+  .about-image{max-width:400px;margin:0 auto;}
+  .gallery-grid{grid-template-columns:repeat(3,1fr);}
+  .works-grid{grid-template-columns:repeat(2,1fr);}
+  .skills-grid{grid-template-columns:repeat(2,1fr);}
 }
 
-/* ========== ABOUT SECTION ========== */
-.about {
-  padding: 10rem 8vw;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
-  align-items: center;
-  min-height: 100vh;
-}
-.about-left { position: relative; }
-.about-image-block {
-  width: 100%;
-  aspect-ratio: 4/5;
-  background: var(--gray);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-}
-.about-red-accent {
-  position: absolute;
-  top: -2rem; left: -2rem;
-  width: 120px; height: 120px;
-  background: var(--red);
-  z-index: -1;
-}
-.about-right .section-title { margin-bottom: 2rem; }
-.about-text {
-  font-size: 0.95rem;
-  line-height: 2;
-  color: rgba(245, 245, 245, 0.65);
-  margin-bottom: 2rem;
-}
-.about-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
-.stat-item { text-align: center; }
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: var(--red);
-  line-height: 1;
-}
-.stat-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-top: 0.5rem;
-  opacity: 0.5;
+@media(max-width:768px){
+  .nav{padding:.8rem 1.2rem;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);mix-blend-mode:normal;}
+  .nav.scrolled{padding:.6rem 1.2rem;}
+  .nav-list{display:none;}
+  .nav-hamburger{display:flex;}
+  .hero{min-height:100vh;min-height:100dvh;}
+  .hero-content{padding:0 5vw;}
+  .hero-title{font-size:clamp(2.5rem,15vw,5rem);}
+  .section-inner{padding:0 5vw;}
+  .about-stats{grid-template-columns:repeat(3,1fr);gap:.5rem;}
+  .stat-num{font-size:1.3rem;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .works-grid{grid-template-columns:1fr;}
+  .skills-grid{grid-template-columns:1fr 1fr;gap:.5rem;}
+  .skill-card{padding:1rem;}
+  .footer{flex-direction:column;gap:.5rem;text-align:center;}
+  .lightbox-prev{left:1rem;}
+  .lightbox-next{right:1rem;}
 }
 
-/* ========== WORKS SECTION ========== */
-.works {
-  padding: 8rem 0;
-  background: var(--dark);
-}
-.works-header {
-  padding: 0 8vw;
-  margin-bottom: 4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-.works-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-}
-.work-card {
-  position: relative;
-  aspect-ratio: 1;
-  overflow: hidden;
-  cursor: none;
-}
-.work-card-inner {
-  width: 100%; height: 100%;
-  background: var(--gray);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
-}
-.work-card:hover .work-card-inner { transform: scale(1.05); }
-.work-overlay {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 2rem;
-  background: linear-gradient(transparent, rgba(10,10,10,0.95));
-  transform: translateY(100%);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.work-card:hover .work-overlay { transform: translateY(0); }
-.work-overlay h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.3rem;
-}
-.work-overlay p {
-  font-size: 0.7rem;
-  color: var(--red);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-/* Red accent on alternating cards */
-.work-card:nth-child(2)::after,
-.work-card:nth-child(5)::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 4px;
-  background: var(--red);
-  z-index: 5;
+@media(max-width:480px){
+  .nav{padding:.6rem 1rem;}
+  .section{padding:3rem 0;}
+  .section-inner{padding:0 4vw;}
+  .section-title{font-size:clamp(1.5rem,7vw,2rem);}
+  .hero-title{font-size:clamp(2rem,18vw,3.5rem);}
+  .hero-subtitle{font-size:1rem;}
+  .gallery-grid{grid-template-columns:1fr 1fr;gap:.3rem;}
+  .skills-grid{grid-template-columns:1fr;}
+  .about-stats{grid-template-columns:1fr 1fr 1fr;}
+  .stat{padding:.6rem;}
+  .stat-num{font-size:1.1rem;}
 }
 
-/* ========== MARQUEE ========== */
-.marquee-section {
-  padding: 3rem 0;
-  overflow: hidden;
-  border-top: 1px solid rgba(245,245,245,0.05);
-  border-bottom: 1px solid rgba(245,245,245,0.05);
-}
-.marquee-track {
-  display: flex;
-  animation: marquee 20s linear infinite;
-  white-space: nowrap;
-}
-.marquee-item {
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0 2rem;
-  color: rgba(245,245,245,0.08);
-  flex-shrink: 0;
-}
-.marquee-item .dot {
-  display: inline-block;
-  width: 12px; height: 12px;
-  background: var(--red);
-  border-radius: 50%;
-  margin: 0 1.5rem;
-  vertical-align: middle;
-}
-
-/* ========== SKILLS SECTION ========== */
-.skills {
-  padding: 10rem 8vw;
-}
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  margin-top: 4rem;
-}
-.skill-card {
-  padding: 0;
-  background: var(--gray);
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.4s ease;
-  aspect-ratio: 1;
-}
-.skill-card:hover { transform: scale(1.02); }
-.skill-overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.6) 100%);
-  transition: background 0.4s ease;
-}
-.skill-card:hover .skill-overlay {
-  background: linear-gradient(135deg, rgba(230,0,18,0.8) 0%, rgba(184,0,14,0.6) 100%);
-}
-.skill-content {
-  position: relative;
-  z-index: 2;
-  padding: 2rem;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.skill-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 3px;
-  background: var(--red);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-  z-index: 3;
-}
-.skill-card:hover::before { transform: scaleX(1); }
-.skill-number {
-  font-size: 3rem;
-  font-weight: 900;
-  color: rgba(245,245,245,0.08);
-  margin-bottom: 1rem;
-  transition: color 0.4s ease;
-}
-.skill-card:hover .skill-number { color: rgba(255,255,255,0.3); }
-.skill-name {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
-}
-.skill-desc {
-  font-size: 0.75rem;
-  line-height: 1.6;
-  opacity: 0.7;
-}
-
-/* ========== CONTACT SECTION ========== */
-.contact {
-  padding: 10rem 8vw;
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-.contact-bg-text {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: clamp(6rem, 18vw, 16rem);
-  font-weight: 900;
-  text-transform: uppercase;
-  color: rgba(245,245,245,0.02);
-  white-space: nowrap;
-  pointer-events: none;
-  letter-spacing: -0.05em;
-}
-.contact-content {
-  position: relative;
-  z-index: 2;
-  max-width: 600px;
-}
-.contact .section-title { margin-bottom: 1.5rem; }
-.contact-text {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: rgba(245,245,245,0.5);
-  margin-bottom: 3rem;
-}
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.contact-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(245,245,245,0.1);
-  transition: color 0.3s ease, border-color 0.3s ease;
-}
-.contact-link:hover {
-  color: var(--red);
-  border-color: var(--red);
-}
-.contact-link .arrow {
-  transition: transform 0.3s ease;
-}
-.contact-link:hover .arrow { transform: translateX(8px); }
-
-/* ========== FOOTER ========== */
-footer {
-  padding: 2rem 8vw;
-  border-top: 1px solid rgba(245,245,245,0.05);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.7rem;
-  color: rgba(245,245,245,0.3);
-  letter-spacing: 0.1em;
-}
-
-/* ========== ANIMATIONS ========== */
-@keyframes slideInRight {
-  from { opacity: 0; transform: skewX(-8deg) translateX(100px); }
-  to { opacity: 1; transform: skewX(-8deg) translateX(0); }
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes scrollLine {
-  0% { transform: scaleY(0); transform-origin: top; }
-  50% { transform: scaleY(1); transform-origin: top; }
-  51% { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* Scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 1024px) {
-  .about { grid-template-columns: 1fr; gap: 3rem; padding: 6rem 6vw; }
-  .skills-grid { grid-template-columns: repeat(2, 1fr); }
-  .works-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero-image-area { display: none; }
-}
-@media (max-width: 768px) {
-  nav { padding: 1rem 1.5rem; }
-  .nav-links { gap: 1.5rem; }
-  .hero-content { padding: 0 6vw; }
-  .about { padding: 5rem 6vw; }
-  .about-stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .skills-grid { grid-template-columns: 1fr 1fr; }
-  .works-grid { grid-template-columns: 1fr 1fr; }
-  .contact { padding: 6rem 6vw; }
-  .cursor, .cursor-dot { display: none; }
-  body { cursor: auto; }
-}
-@media (max-width: 480px) {
-  .skills-grid { grid-template-columns: 1fr; }
-  .works-grid { grid-template-columns: 1fr; }
-  .nav-links a { font-size: 0.65rem; }
+/* ═══════════ P5 MENU MOBILE ═══════════ */
+@media(max-width:768px){
+  .p5-menu-item{font-size:clamp(1.5rem,8vw,2.5rem);padding:.6rem 1.5rem;}
 }
 </style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-dot" id="cursorDot"></div>
+<!-- Loading -->
+<div class="loading" id="loading">
+  <div class="loading-ring"><span></span><span></span><span></span></div>
+  <div class="loading-text">Take Your Heart</div>
+</div>
 
-<!-- Audio will be created by JavaScript -->
+<!-- Scroll Progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
 
-<!-- Audio Control Button -->
-<button id="audioToggle" style="position:fixed;bottom:2rem;right:2rem;z-index:1001;width:50px;height:50px;border-radius:50%;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:1;transition:opacity 0.3s ease;box-shadow:0 4px 20px rgba(230,0,18,0.4);">
-  <svg id="audioIcon" width="20" height="20" viewBox="0 0 24 24" fill="white">
-    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-  </svg>
-</button>
-
-<!-- Navigation -->
-<nav>
-  <div class="nav-logo">J<span>.</span>Portfolio</div>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#works">Works</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-<!-- Hero Section -->
-<section class="hero" id="hero">
-  <div class="hero-bg-block"></div>
-  <div class="hero-diagonal"></div>
-  <div class="hero-content">
-    <p class="hero-subtitle">Persona 5X — Phantom Thief</p>
-    <h1 class="hero-title">
-      <span class="outline">雨宫</span><br>
-      <span class="accent">莲</span>
-    </h1>
-    <p class="hero-desc">
-      暗夜中觉醒的灵魂，以假面之姿对抗扭曲的欲望。<br>
-      Let justice shine upon this distorted world.
-    </p>
-  </div>
-  <div class="hero-image-area">
-    <img loading="lazy" src="images/hero-joker-new4.jpg" alt="Joker 雨宫莲" style="width:100%;height:100%;object-fit:cover;object-position:top;">
-  </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="line"></div>
-  </div>
-</section>
-
-<!-- About Section -->
-<section class="about" id="about">
-  <div class="about-left reveal">
-    <div class="about-red-accent"></div>
-    <div class="about-image-block">
-      <img loading="lazy" src="images/about-joker.jpg" alt="Joker 特写" style="width:100%;height:100%;object-fit:cover;">
-    </div>
-  </div>
-  <div class="about-right reveal">
-    <p class="section-label">// About</p>
-    <h2 class="section-title">怪盗团的<br>核心成员</h2>
-    <p class="about-text">
-      作为心之怪盗团的领袖，雨宫莲以「Joker」之名在认知世界中行动。
-      拥有多面人格的力量，能够自如切换不同的Persona，在战斗中展现出无与伦比的适应能力。
-    </p>
-    <p class="about-text">
-      他的故事是关于正义、友谊与觉醒——在被社会贴上"问题少年"的标签后，
-      他选择用行动证明：真正的正义不在于服从，而在于反抗不公。
-    </p>
-    <div class="about-stats">
-      <div class="stat-item">
-        <div class="stat-number" data-count="12">0</div>
-        <div class="stat-label">Persona</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-count="8">0</div>
-        <div class="stat-label">怪盗成员</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-count="100">0</div>
-        <div class="stat-label">正义值</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Works Section -->
-<section class="works" id="works">
-  <div class="works-header reveal">
-    <div>
-      <p class="section-label">// Gallery</p>
-      <h2 class="section-title">作品展示</h2>
-    </div>
-    <p style="font-size:0.75rem; opacity:0.4; letter-spacing:0.15em;">6 WORKS</p>
-  </div>
-  <div class="works-grid">
-    <div class="work-card reveal">
-      <div class="work-card-inner" style="padding:0;">
-        <img loading="lazy" src="images/work-01.jpg" alt="战斗姿态" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="work-overlay">
-        <h3>战斗姿态</h3>
-        <p>Combat Pose</p>
-      </div>
-    </div>
-    <div class="work-card reveal">
-      <div class="work-card-inner" style="padding:0;">
-        <img loading="lazy" src="images/work-02.jpg" alt="Persona 觉醒" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="work-overlay">
-        <h3>Persona 觉醒</h3>
-        <p>Awakening</p>
-      </div>
-    </div>
-    <div class="work-card reveal">
-      <div class="work-card-inner" style="padding:0;">
-        <img loading="lazy" src="images/work-03.jpg" alt="暗夜潜行" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="work-overlay">
-        <h3>暗夜潜行</h3>
-        <p>Night Operation</p>
-      </div>
-    </div>
-    <div class="work-card reveal">
-      <div class="work-card-inner" style="padding:0;">
-        <img loading="lazy" src="images/work-04.jpg" alt="总攻击" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="work-overlay">
-        <h3>All-Out Attack</h3>
-        <p>总攻击演出</p>
-      </div>
-    </div>
-    <div class="work-card reveal">
-      <div class="work-card-inner" style="padding:0;">
-        <img loading="lazy" src="images/work-05.jpg" alt="日常形态" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="work-overlay">
-        <h3>高中生莲</h3>
-        <p>Daily Life</p>
-      </div>
-    </div>
-    <div class="work-card reveal">
-      <div class="work-card-inner" style="padding:0;">
-        <img loading="lazy" src="images/work-06.jpg" alt="Wildcard" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="work-overlay">
-        <h3>Wildcard</h3>
-        <p>命运之牌</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Marquee -->
-<div class="marquee-section">
-  <div class="marquee-track">
-    <span class="marquee-item">雨宫莲 <span class="dot"></span> JOKER <span class="dot"></span> PHANTOM THIEF <span class="dot"></span> PERSONA <span class="dot"></span> 怪盗团 <span class="dot"></span> WILDCARD</span>
-    <span class="marquee-item">雨宫莲 <span class="dot"></span> JOKER <span class="dot"></span> PHANTOM THIEF <span class="dot"></span> PERSONA <span class="dot"></span> 怪盗团 <span class="dot"></span> WILDCARD</span>
+<!-- Nav -->
+<div class="nav">
+  <div class="nav-logo" onclick="scrollTo({top:0,behavior:'smooth'})">P<span>5</span>X</div>
+  <ul class="nav-list">
+    <li><a href="#about">Profile</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger">
+    <span></span><span></span><span></span>
   </div>
 </div>
 
-<!-- Skills Section -->
-<section class="skills" id="skills">
-  <div class="reveal">
-    <p class="section-label">// Abilities</p>
-    <h2 class="section-title">能力概览</h2>
+<!-- P5 Menu -->
+<div class="p5-menu" id="p5Menu">
+  <div class="p5-menu-close" id="p5MenuClose"></div>
+  <div class="p5-menu-items">
+    <div class="p5-menu-item" onclick="scrollToSection('hero')">首页</div>
+    <div class="p5-menu-item" onclick="scrollToSection('about')">档案</div>
+    <div class="p5-menu-item" onclick="scrollToSection('gallery')">图鉴</div>
+    <div class="p5-menu-item" onclick="scrollToSection('works')">作品</div>
+    <div class="p5-menu-item" onclick="scrollToSection('skills')">能力</div>
+    <div class="p5-menu-item" onclick="scrollToSection('contact')">联络</div>
   </div>
-  <div class="skills-grid">
-    <div class="skill-card reveal" style="background-image: url('images/hero-joker-new4.jpg'); background-size: cover; background-position: center;">
-      <div class="skill-overlay"></div>
-      <div class="skill-content">
-        <div class="skill-number">01</div>
-        <div class="skill-name">Persona 召唤</div>
-        <div class="skill-desc">多Persona切换战斗，Wildcard的独有能力</div>
-      </div>
+</div>
+
+<!-- Back to Top -->
+<div class="back-to-top" id="backToTop" onclick="scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" onclick="closeLightbox()"></div>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <div class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">◀</div>
+  <div class="lightbox-nav lightbox-next" onclick="navLightbox(1)">▶</div>
+</div>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="images/hero-joker-new1.jpg" alt="Joker">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-label">🎭 Phantom Thieves of Hearts</p>
+    <h1 class="hero-title">
+      <span class="outline">雨宫</span><br><span class="red">莲</span>
+    </h1>
+    <p class="hero-subtitle">JOKER — 心之怪盗团团长</p>
+    <p class="hero-desc">暗夜中觉醒的灵魂，以假面之姿对抗扭曲的欲望。拥有多面人格的力量，能够自如切换不同的Persona。</p>
+    <div class="hero-tags">
+      <span class="tag">🃏 WILDCARD</span>
+      <span class="tag">⚡ LEVEL 99</span>
+      <span class="tag">🌟 THE WORLD</span>
     </div>
-    <div class="skill-card reveal" style="background-image: url('images/about-joker.jpg'); background-size: cover; background-position: center;">
-      <div class="skill-overlay"></div>
-      <div class="skill-content">
-        <div class="skill-number">02</div>
-        <div class="skill-name">潜入认知</div>
-        <div class="skill-desc">深入扭曲欲望构成的异世界宫殿</div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="line"></div></div>
+</section>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section class="section" id="about" style="background:rgba(17,17,17,.9);">
+  <div class="section-inner">
+    <div class="reveal"><p class="section-label">// Phantom Thief Profile</p><h2 class="section-title">怪盗档案 · <span class="red">JOKER</span></h2></div>
+    <div class="about-grid">
+      <div class="about-image reveal-left">
+        <img src="images/work-extra2.jpg" alt="Joker">
       </div>
-    </div>
-    <div class="skill-card reveal" style="background-image: url('images/work-01.jpg'); background-size: cover; background-position: center;">
-      <div class="skill-overlay"></div>
-      <div class="skill-content">
-        <div class="skill-number">03</div>
-        <div class="skill-name">怪盗行动</div>
-        <div class="skill-desc">精密策划并执行心灵盗窃作战</div>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="background-image: url('images/work-02.jpg'); background-size: cover; background-position: center;">
-      <div class="skill-overlay"></div>
-      <div class="skill-content">
-        <div class="skill-number">04</div>
-        <div class="skill-name">羁绊之力</div>
-        <div class="skill-desc">通过Confidant羁绊解锁更强大的力量</div>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="background-image: url('images/work-03.jpg'); background-size: cover; background-position: center;">
-      <div class="skill-overlay"></div>
-      <div class="skill-content">
-        <div class="skill-number">05</div>
-        <div class="skill-name">枪弹齐射</div>
-        <div class="skill-desc">精准射击与近战格斗的完美结合</div>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="background-image: url('images/work-04.jpg'); background-size: cover; background-position: center;">
-      <div class="skill-overlay"></div>
-      <div class="skill-content">
-        <div class="skill-number">06</div>
-        <div class="skill-name">弱点打击</div>
-        <div class="skill-desc">精准识别敌人弱点，一击制胜</div>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="background-image: url('images/work-05.jpg'); background-size: cover; background-position: center;">
-      <div class="skill-overlay"></div>
-      <div class="skill-content">
-        <div class="skill-number">07</div>
-        <div class="skill-name">面具融合</div>
-        <div class="skill-desc">融合不同Persona创造更强大的存在</div>
-      </div>
-    </div>
-    <div class="skill-card reveal" style="background-image: url('images/work-06.jpg'); background-size: cover; background-position: center;">
-      <div class="skill-overlay"></div>
-      <div class="skill-content">
-        <div class="skill-number">08</div>
-        <div class="skill-name">首领指挥</div>
-        <div class="skill-desc">统领怪盗团，制定完美战术策略</div>
+      <div class="reveal-right">
+        <h3 class="about-name">JOKER<br><span class="red">雨宫莲</span></h3>
+        <p class="about-role">🃏 Wildcard · 怪盗团团长</p>
+        <p class="about-text">作为心之怪盗团的领袖，雨宫莲以「Joker」之名在认知世界中行动。白天是秀尽学园的转校生，夜晚则是潜入异世界的怪盗。他拥有多面人格的力量，能够自如切换不同的Persona，在战斗中展现出无与伦比的适应能力。</p>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-num">99</div><div class="stat-label">LEVEL</div></div>
+          <div class="stat"><div class="stat-num">∞</div><div class="stat-label">PERSONA</div></div>
+          <div class="stat"><div class="stat-num">12</div><div class="stat-label">ARCANA</div></div>
+        </div>
+        <div class="status-panel">
+          <div class="status-header"><div class="status-title">⚡ STATUS</div><div class="status-level">LV.99</div></div>
+          <div class="stat-row"><span>HP</span><span>999/999</span></div>
+          <div class="stat-track"><div class="stat-fill" style="width:0%" data-width="100%"></div></div>
+          <div class="stat-row"><span>SP</span><span>850/999</span></div>
+          <div class="stat-track"><div class="stat-fill" style="width:0%" data-width="85%"></div></div>
+          <div class="stat-row"><span>EXP</span><span>MAX</span></div>
+          <div class="stat-track"><div class="stat-fill" style="width:0%" data-width="100%"></div></div>
+        </div>
+        <div class="dialog">
+          <div class="dialog-header"><div class="dialog-avatar">🃏</div><div class="dialog-name">JOKER</div></div>
+          <div class="dialog-text">我们是心之怪盗团——在暗夜中行动，夺取扭曲的心灵。</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Contact Section -->
-<section class="contact" id="contact">
-  <div class="contact-bg-text">CONTACT</div>
-  <div class="contact-content reveal">
-    <p class="section-label">// Get in Touch</p>
-    <h2 class="section-title">发出预告信</h2>
-    <p class="contact-text">
-      如果你也相信正义不会缺席，欢迎通过以下方式联系。<br>
-      怪盗团随时待命。
-    </p>
-    <div class="contact-links">
-      <a href="mailto:joker@phantom.thieves" class="contact-link">
-        <span class="arrow">→</span>
-        <span>joker@phantom.thieves</span>
-      </a>
-      <a href="#" class="contact-link">
-        <span class="arrow">→</span>
-        <span>Twitter / X — @Joker_P5X</span>
-      </a>
-      <a href="#" class="contact-link">
-        <span class="arrow">→</span>
-        <span>Bilibili — 雨宫莲Official</span>
-      </a>
-      <a href="#" class="contact-link">
-        <span class="arrow">→</span>
-        <span>Pixiv — 作品集</span>
-      </a>
+<!-- ═══════ GALLERY ═══════ -->
+<section class="section" id="gallery">
+  <div class="section-inner">
+    <div class="reveal"><p class="section-label">// Joker Gallery</p><h2 class="section-title">雨宫莲 · <span class="red">图鉴</span></h2><p class="section-desc">暗夜假面的各个姿态，每一帧都是怪盗的灵魂。</p></div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal" onclick="openLightbox(0)"><img src="images/hero-joker-new1.jpg" alt=""><div class="overlay"><div class="label">🎭 HERO</div><div class="title">暗夜假面</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(1)"><img src="images/hero-joker-new2.jpg" alt=""><div class="overlay"><div class="label">⚡ AWAKENING</div><div class="title">觉醒瞬间</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(2)"><img src="images/hero-joker-new4.jpg" alt="" style="object-position:center center;"><div class="overlay"><div class="label">🃏 WILDCARD</div><div class="title">多面人格</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(3)"><img src="images/work-01.jpg" alt=""><div class="overlay"><div class="label">🌙 PHANTOM</div><div class="title">怪盗姿态</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(4)"><img src="images/work-02.jpg" alt=""><div class="overlay"><div class="label">👤 PROFILE</div><div class="title">档案照</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(5)"><img src="images/role_joker.png" alt=""><div class="overlay"><div class="label">🌟 FULL</div><div class="title">全身立绘</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(6)"><img src="images/hero_bg.jpg" alt=""><div class="overlay"><div class="label">🌃 NIGHT</div><div class="title">暗夜行动</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(7)"><img src="images/work-03.jpg" alt=""><div class="overlay"><div class="label">💥 PERSONA</div><div class="title">Persona觉醒</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
-<footer>
-  <span>© 2026 JOKER — 雨宫莲 Portfolio</span>
-  <span>PERSONA 5X FAN PROJECT</span>
-</footer>
+<!-- ═══════ MARQUEE ═══════ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">🎭 TAKE YOUR HEART <span class="dot"></span> ⚔️ PERSONA 5X <span class="dot"></span> 🃏 WILDCARD <span class="dot"></span> 🌙 PHANTOM THIEF <span class="dot"></span> 💥 ALL-OUT ATTACK <span class="dot"></span> 🎭 COGNITIVE WORLD</span>
+    <span class="marquee-item">🎭 TAKE YOUR HEART <span class="dot"></span> ⚔️ PERSONA 5X <span class="dot"></span> 🃏 WILDCARD <span class="dot"></span> 🌙 PHANTOM THIEF <span class="dot"></span> 💥 ALL-OUT ATTACK <span class="dot"></span> 🎭 COGNITIVE WORLD</span>
+  </div>
+</div>
+
+<!-- ═══════ WORKS ═══════ -->
+<section class="section" id="works" style="background:rgba(17,17,17,.9);">
+  <div class="section-inner">
+    <div class="reveal"><p class="section-label">// Joker Works</p><h2 class="section-title">雨宫莲 · <span class="red">作品集</span></h2><p class="section-desc">怪盗的每一场演出，都是对扭曲世界的宣战。</p></div>
+    <div class="works-grid">
+      <div class="work-card reveal"><img src="images/work-01.jpg" alt=""><div class="info"><div class="num">01</div><div class="label">🎭 PHANTOM</div><div class="title">暗夜假面</div><div class="desc">假面之下的觉醒灵魂</div></div></div>
+      <div class="work-card reveal"><img src="images/work-02.jpg" alt=""><div class="info"><div class="num">02</div><div class="label">⚡ AWAKENING</div><div class="title">Persona觉醒</div><div class="desc">多面人格的力量爆发</div></div></div>
+      <div class="work-card reveal"><img src="images/work-03.jpg" alt=""><div class="info"><div class="num">03</div><div class="label">🌙 NIGHT</div><div class="title">夜间行动</div><div class="desc">暗夜中的怪盗任务</div></div></div>
+      <div class="work-card reveal"><img src="images/work-04.jpg" alt=""><div class="info"><div class="num">04</div><div class="label">💥 ATTACK</div><div class="title">总攻击</div><div class="desc">怪盗团的全力一击</div></div></div>
+      <div class="work-card reveal"><img src="images/work-05.jpg" alt=""><div class="info"><div class="num">05</div><div class="label">👤 DAILY</div><div class="title">日常形态</div><div class="desc">秀尽学园的转校生</div></div></div>
+      <div class="work-card reveal"><img src="images/hero-joker-new2.jpg" alt=""><div class="info"><div class="num">06</div><div class="label">🌟 SPECIAL</div><div class="title">特别形态</div><div class="desc">超越极限的力量</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SKILLS ═══════ -->
+<section class="section" id="skills">
+  <div class="section-inner">
+    <div class="reveal"><p class="section-label">// Joker Abilities</p><h2 class="section-title">雨宫莲 · <span class="red">能力值</span></h2></div>
+    <div class="skills-grid">
+      <div class="skill-card reveal"><div class="skill-icon">🎭</div><div class="skill-name">Persona召唤</div><div class="skill-desc">Wildcard的独有能力，多Persona切换战斗</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="100%"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-icon">⚔️</div><div class="skill-name">剑术精通</div><div class="skill-desc">近战格斗与枪械射击的完美结合</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="95%"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-icon">🌙</div><div class="skill-name">潜入认知</div><div class="skill-desc">深入扭曲欲望构成的异世界宫殿</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="90%"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-icon">💝</div><div class="skill-name">羁绊之力</div><div class="skill-desc">通过Confidant羁绊解锁更强大的力量</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="88%"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-icon">🃏</div><div class="skill-name">面具融合</div><div class="skill-desc">融合不同Persona创造更强大的存在</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="92%"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-icon">👑</div><div class="skill-name">首领指挥</div><div class="skill-desc">统领怪盗团，制定完美战术策略</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="98%"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-icon">💫</div><div class="skill-name">弱点打击</div><div class="skill-desc">精准识别敌人弱点，一击制胜</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="96%"></div></div></div>
+      <div class="skill-card reveal"><div class="skill-icon">🔮</div><div class="skill-name">天鹅绒秘仪</div><div class="skill-desc">通过特殊合体解锁隐藏Persona</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="85%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section class="section" id="contact" style="background:rgba(17,17,17,.9);">
+  <div class="section-inner">
+    <div class="contact-content">
+      <div class="reveal"><p class="section-label">// Calling Card</p><h2 class="section-title">发出<span class="red">预告信</span></h2></div>
+      <div class="dialog reveal">
+        <div class="dialog-header"><div class="dialog-avatar">📮</div><div class="dialog-name">预告信</div></div>
+        <div class="dialog-text">致那些被扭曲欲望蒙蔽的灵魂：我们将取走你腐朽的心。——心之怪盗团</div>
+      </div>
+      <p class="contact-text reveal">如果你也相信正义不会缺席，欢迎通过以下方式联系。怪盗团随时待命。</p>
+      <div class="contact-links">
+        <a href="mailto:joker@phantom.thieves" class="contact-link reveal"><span class="arrow">→</span><span>📧 joker@phantom.thieves</span></a>
+        <a href="#" class="contact-link reveal"><span class="arrow">→</span><span>🐦 Twitter / X — @Joker_P5X</span></a>
+        <a href="#" class="contact-link reveal"><span class="arrow">→</span><span>📺 Bilibili — 雨宫莲Official</span></a>
+        <a href="#" class="contact-link reveal"><span class="arrow">→</span><span>🎨 Pixiv — 作品集</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<div class="footer">
+  <span>© 2026 JOKER — 雨宫莲 | 心之怪盗团</span>
+  <span>🎭 PERSONA 5X</span>
+</div>
 
 <script>
-// Custom Cursor
-const cursor = document.getElementById('cursor');
-const cursorDot = document.getElementById('cursorDot');
-let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+// Loading
+(function(){
+  var s=document.getElementById('loading');
+  window.addEventListener('load',function(){s.style.opacity='0';setTimeout(function(){s.style.display='none'},800)});
+  setTimeout(function(){s.style.opacity='0';setTimeout(function(){s.style.display='none'},800)},3000);
+})();
 
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  cursorDot.style.left = mouseX + 'px';
-  cursorDot.style.top = mouseY + 'px';
-});
+// Scroll Progress
+window.addEventListener('scroll',function(){
+  var bar=document.getElementById('scrollProgress');
+  var scrollTop=window.scrollY;
+  var docHeight=document.documentElement.scrollHeight-window.innerHeight;
+  bar.style.width=(scrollTop/docHeight)*100+'%';
+},{passive:true});
 
-function animateCursor() {
-  cursorX += (mouseX - cursorX) * 0.15;
-  cursorY += (mouseY - cursorY) * 0.15;
-  cursor.style.left = cursorX + 'px';
-  cursor.style.top = cursorY + 'px';
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
+// Nav scroll
+var nav=document.querySelector('.nav');
+var btt=document.getElementById('backToTop');
+var sections=document.querySelectorAll('.section[id],.hero[id]');
+var navLinks=document.querySelectorAll('.nav-list a[href^="#"]');
+window.addEventListener('scroll',function(){
+  var sy=window.scrollY;
+  nav.classList.toggle('scrolled',sy>80);
+  btt.classList.toggle('visible',sy>400);
+  var cur='';
+  sections.forEach(function(s){if(sy>=s.offsetTop-200)cur=s.id});
+  navLinks.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+cur)});
+},{passive:true});
 
-// Hover effect on interactive elements
-document.querySelectorAll('a, .work-card, .skill-card').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-});
-
-// Scroll Reveal
-const revealElements = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-
-revealElements.forEach(el => observer.observe(el));
-
-// Counter Animation
-const counters = document.querySelectorAll('.stat-number[data-count]');
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const target = parseInt(entry.target.dataset.count);
-      let current = 0;
-      const increment = target / 40;
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          entry.target.textContent = target;
-          clearInterval(timer);
-        } else {
-          entry.target.textContent = Math.floor(current);
-        }
-      }, 30);
-      counterObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 });
-
-counters.forEach(c => counterObserver.observe(c));
-
-// Smooth scroll for nav links
-document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-  link.addEventListener('click', e => {
+// Smooth scroll
+document.querySelectorAll('.nav-list a[href^="#"]').forEach(function(l){
+  l.addEventListener('click',function(e){
     e.preventDefault();
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth'});
   });
 });
 
-// Parallax on hero background block
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const heroBlock = document.querySelector('.hero-bg-block');
-  if (heroBlock && scrollY < window.innerHeight) {
-    heroBlock.style.transform = `skewX(-8deg) translateY(${scrollY * 0.1}px)`;
-  }
-});
-
-// Audio Control
-const audioToggle = document.getElementById('audioToggle');
-const audioIcon = document.getElementById('audioIcon');
-let isPlaying = false;
-let audioContext = null;
-let analyser = null;
-let dataArray = null;
-
-// Create audio element with lazy loading
-const bgm = new Audio();
-bgm.volume = 0.8;
-bgm.loop = true;
-bgm.preload = 'none'; // Don't preload until user clicks
-bgm.src = 'audio/bgm.mp3';
-
-// Audio file error handling
-bgm.addEventListener('error', (e) => {
-  console.error('Audio error:', e.target.error);
-  audioToggle.style.background = '#666';
-  audioToggle.title = '音频加载失败';
-});
-
-bgm.addEventListener('canplaythrough', () => {
-  console.log('Audio file loaded');
-  audioToggle.title = '点击播放音乐';
-});
-
-// Initialize Web Audio API for beat detection
-function initAudioContext() {
-  if (audioContext) return;
-  try {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = audioContext.createAnalyser();
-    analyser.fftSize = 256;
-    const bufferLength = analyser.frequencyBinCount;
-    dataArray = new Uint8Array(bufferLength);
-
-    const source = audioContext.createMediaElementSource(bgm);
-    source.connect(analyser);
-    analyser.connect(audioContext.destination);
-  } catch (e) {
-    console.error('Web Audio API init error:', e);
-  }
+// P5 Menu
+var p5Menu=document.getElementById('p5Menu');
+var hamburger=document.getElementById('hamburger');
+document.getElementById('p5MenuClose').addEventListener('click',function(){p5Menu.classList.remove('open');hamburger.classList.remove('open')});
+hamburger.addEventListener('click',function(){p5Menu.classList.toggle('open');this.classList.toggle('open')});
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  p5Menu.classList.remove('open');
+  hamburger.classList.remove('open');
 }
 
-// Update button icon
-function updateAudioIcon() {
-  if (isPlaying) {
-    audioIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-  } else {
-    audioIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
-  }
-}
-
-// Play audio
-function playAudio() {
-  if (isPlaying) return;
-
-  bgm.play().then(() => {
-    isPlaying = true;
-    updateAudioIcon();
-    initAudioContext();
-    animateCursorBeat();
-  }).catch((e) => {
-    console.error('Play failed:', e);
+// Reveal
+var reveals=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.stat-fill[data-width]').forEach(function(b){setTimeout(function(){b.style.width=b.dataset.width},200)});
+      e.target.querySelectorAll('.skill-bar-fill[data-width]').forEach(function(b){setTimeout(function(){b.style.width=b.dataset.width},300)});
+    }
   });
+},{threshold:.15,rootMargin:'0px 0px -30px 0px'});
+reveals.forEach(function(el){obs.observe(el)});
+
+// Lightbox
+var lightboxImages=[
+  'images/hero-joker-new1.jpg','images/hero-joker-new2.jpg','images/hero-joker-new4.jpg',
+  'images/work-01.jpg','images/work-02.jpg','images/role_joker.png',
+  'images/hero_bg.jpg','images/work-03.jpg'
+];
+var currentLightbox=0;
+function openLightbox(i){
+  currentLightbox=i;
+  document.getElementById('lightboxImg').src=lightboxImages[i];
+  document.getElementById('lightbox').classList.add('active');
 }
-
-// Pause audio
-function pauseAudio() {
-  if (!isPlaying) return;
-
-  bgm.pause();
-  isPlaying = false;
-  updateAudioIcon();
+function closeLightbox(){document.getElementById('lightbox').classList.remove('active')}
+function navLightbox(d){
+  currentLightbox=(currentLightbox+d+lightboxImages.length)%lightboxImages.length;
+  document.getElementById('lightboxImg').src=lightboxImages[currentLightbox];
 }
-
-// Toggle on button click
-audioToggle.addEventListener('click', (e) => {
-  e.stopPropagation();
-  if (isPlaying) {
-    pauseAudio();
-  } else {
-    playAudio();
-  }
+document.addEventListener('keydown',function(e){
+  if(!document.getElementById('lightbox').classList.contains('active'))return;
+  if(e.key==='Escape')closeLightbox();
+  if(e.key==='ArrowLeft')navLightbox(-1);
+  if(e.key==='ArrowRight')navLightbox(1);
 });
-
-// Auto-play on first page interaction
-let hasInteracted = false;
-document.addEventListener('click', () => {
-  if (!hasInteracted) {
-    hasInteracted = true;
-    playAudio();
-  }
-});
-
-// Cursor beat animation
-function animateCursorBeat() {
-  if (!isPlaying || !analyser) return;
-
-  analyser.getByteFrequencyData(dataArray);
-
-  // Calculate average frequency
-  let sum = 0;
-  for (let i = 0; i < dataArray.length; i++) {
-    sum += dataArray[i];
-  }
-  const average = sum / dataArray.length;
-
-  // Map to cursor scale (1.0 to 2.5)
-  const scale = 1.0 + (average / 255) * 1.5;
-
-  // Apply to cursor
-  const cursorEl = document.getElementById('cursor');
-  if (cursorEl) {
-    cursorEl.style.transform = `translate(-50%, -50%) scale(${scale})`;
-    // Add red glow effect based on beat intensity
-    const glowIntensity = Math.floor((average / 255) * 30);
-    cursorEl.style.boxShadow = `0 0 ${glowIntensity}px rgba(230, 0, 18, ${average / 255})`;
-  }
-
-  requestAnimationFrame(animateCursorBeat);
-}
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox()});
 </script>
 </body>
 </html>

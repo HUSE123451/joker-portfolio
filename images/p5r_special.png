@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>    
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="keywords" content="完美、 软件、 游戏、 完美世界、 武林外传、 完美国际、 诛仙、 赤壁、 热舞派对、 口袋西游、 Perfect、 World、 pwrd、 software、 games、 3D、online " />
+<title>您访问的页面不存在 - 完美世界</title>
+<meta name="viewport" content="width=750,user-scalable=no" />
+<meta name="format-detection" content="telephone=no" />
+<style type="text/css">
+    *{margin: 0; padding: 0;}
+    body,html{width: 100%; height: 100%;}
+    body{background: #f6f1e7;font-family:"Microsoft Yahei";}
+    #wrap{background:url(https://static.games.wanmei.com/public/images/error.png) no-repeat 0 0; position: fixed; left: 50%; top: 50%; width: 726px; height: 370px; margin: -220px 0 0 -363px;}
+    #wrap .text{text-align: center; font-size: 18px; color: #333; width: 100%; position: absolute; left: 0; bottom: 0;}
+    #wrap .text span{color: #f3813c; padding: 0 5px;}
+    @media only screen and (max-device-width : 750px){
+        #wrap .text{font-size: 24px;}
+    }
+</style>
+</head>
+<body>
+<div id="wrap">
+    <div class="text">无法找到您访问的地址，<span id="time">5</span>秒后跳转至<span id="pageName">完美世界</span>首页</div>
+</div>
+<script type="text/javascript" src="https://static.games.wanmei.com/public/js/jq_183.js"></script>
+<script type="text/javascript" src="https://static.games.wanmei.com/public/js/stat.js"></script>
+<script type="text/javascript">
+    function id(id){return document.getElementById(id)}
+    var locationUrl = document.location.hostname;
+    var startTime = 5;
+    setInterval(function(){
+        id("time").innerHTML = --startTime;
+        if(startTime == 0){
+            window.location.href = "https://www.wanmei.com";
+        }
+    },1000);
+</script>
+</body>
+</html>
