@@ -21,11 +21,17 @@
 html{scroll-behavior:smooth;font-size:16px;}
 body{font-family:'Segoe UI','Microsoft YaHei',system-ui,sans-serif;background:#050508;color:var(--white);overflow-x:hidden;}
 
-/* ═══════════ FLOWING GLOW BACKGROUND ═══════════ */
-body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;z-index:-1;background:radial-gradient(ellipse 60% 50% at 20% 30%,var(--accent) 0%,transparent 50%),radial-gradient(ellipse 50% 60% at 80% 70%,var(--accent) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 50% 50%,var(--accent) 0%,transparent 60%);opacity:.15;filter:blur(60px);animation:glowDrift 12s ease-in-out infinite alternate;}
-@keyframes glowDrift{0%{transform:translate(0,0) scale(1);}50%{transform:translate(30px,-20px) scale(1.1);}100%{transform:translate(-20px,30px) scale(0.95);}}
-body::after{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;z-index:-1;background:radial-gradient(ellipse 50% 50% at 70% 20%,var(--accent) 0%,transparent 50%),radial-gradient(ellipse 60% 40% at 30% 80%,var(--accent) 0%,transparent 50%);opacity:.1;filter:blur(80px);animation:glowDrift2 15s ease-in-out infinite alternate-reverse;}
-@keyframes glowDrift2{0%{transform:translate(0,0) scale(1.1);}50%{transform:translate(-25px,25px) scale(1);}100%{transform:translate(20px,-15px) scale(1.05);}}
+/* ═══════════ FLOWING GLOW BLOBS ═══════════ */
+.glow-blobs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;}
+.glow-blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.25;will-change:transform;transition:background 1s ease;}
+.glow-blob-1{width:600px;height:600px;top:-10%;left:-5%;background:var(--accent);animation:blobDrift1 18s ease-in-out infinite;}
+.glow-blob-2{width:500px;height:500px;bottom:-15%;right:-10%;background:var(--accent);animation:blobDrift2 22s ease-in-out infinite;opacity:.2;}
+.glow-blob-3{width:400px;height:400px;top:40%;left:60%;background:var(--accent);animation:blobDrift3 20s ease-in-out infinite;opacity:.18;}
+.glow-blob-4{width:350px;height:350px;top:20%;left:30%;background:var(--accent);animation:blobDrift4 25s ease-in-out infinite;opacity:.12;}
+@keyframes blobDrift1{0%,100%{transform:translate(0,0) scale(1);}25%{transform:translate(80px,60px) scale(1.1);}50%{transform:translate(40px,-40px) scale(0.9);}75%{transform:translate(-30px,50px) scale(1.05);}}
+@keyframes blobDrift2{0%,100%{transform:translate(0,0) scale(1);}25%{transform:translate(-60px,-50px) scale(1.15);}50%{transform:translate(50px,30px) scale(0.95);}75%{transform:translate(-40px,-60px) scale(1.1);}}
+@keyframes blobDrift3{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(-70px,40px) scale(1.08);}66%{transform:translate(30px,-50px) scale(0.92);}}
+@keyframes blobDrift4{0%,100%{transform:translate(0,0) scale(1);}25%{transform:translate(50px,-30px) scale(1.12);}50%{transform:translate(-40px,60px) scale(0.88);}75%{transform:translate(60px,20px) scale(1.06);}}
 
 a{color:inherit;text-decoration:none;}
 img{max-width:100%;display:block;}
@@ -619,6 +625,14 @@ body.theme-cyan{--accent:#00d4aa;--accent-bg:rgba(0,212,170,.15);--accent-border
 </style>
 </head>
 <body>
+
+<!-- Flowing Glow Blobs -->
+<div class="glow-blobs">
+  <div class="glow-blob glow-blob-1"></div>
+  <div class="glow-blob glow-blob-2"></div>
+  <div class="glow-blob glow-blob-3"></div>
+  <div class="glow-blob glow-blob-4"></div>
+</div>
 
 <!-- Loading -->
 <div class="loading" id="loading">
@@ -1465,6 +1479,12 @@ function applyTheme(track){
   musicHex.style.setProperty('--theme-color',track.color);
   musicHex.style.setProperty('--theme-bg',track.color.replace(')',',0.15)').replace('rgb','rgba'));
   musicHex.style.setProperty('--theme-border',track.color.replace(')',',0.3)').replace('rgb','rgba'));
+
+  // Update glow blobs
+  document.querySelectorAll('.glow-blob').forEach(function(b){
+    b.style.background=track.color;
+    b.style.transition='background 1s ease';
+  });
 
   // Flash overlay
   musicOverlay.style.background=track.color;
