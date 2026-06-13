@@ -3,15 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#e60012">
-<meta name="description" content="JOKER — 雨宫莲 | Persona 5X 怪盗团作品集">
 <title>JOKER — 雨宫莲 | P5X Portfolio</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎭</text></svg>">
-<link rel="preload" href="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" as="image">
-<link rel="preload" href="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/audio/bgm.mp3" as="audio" type="audio/mpeg">
-<link rel="dns-prefetch" href="https://gcore.jsdelivr.net">
-<link rel="preconnect" href="https://fonts.font.im">
-<link href="https://fonts.font.im/css2?family=Bebas+Neue&family=Oswald:wght@700&display=swap" rel="stylesheet">
+<link rel="preload" href="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" as="image">
 <style>
 /* ═══════════ RESET ═══════════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -66,19 +60,14 @@ img{max-width:100%;display:block;}
 .p5-menu.open .p5-menu-item:nth-child(6){transition-delay:.35s;}
 .p5-menu-item:hover{color:var(--red);transform:translateX(20px);}
 
-/* ═══════════ LOADING — P5 EYE + DIAMOND ═══════════ */
+/* ═══════════ LOADING ═══════════ */
 .loading{position:fixed;inset:0;background:#000;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s;}
-.loading-eye{position:relative;width:120px;height:80px;margin-bottom:2rem;}
-.loading-eye svg{width:100%;height:100%;}
-.eye-iris{fill:var(--red);transform-origin:center;animation:eyePulse 2s ease-in-out infinite;}
-.eye-outline{fill:none;stroke:var(--red);stroke-width:2;}
-.loading-diamond{position:absolute;top:50%;left:50%;width:20px;height:20px;background:var(--red);transform:translate(-50%,-50%) rotate(45deg);animation:diamondSpin 3s linear infinite;}
-@keyframes eyePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.88)}}
-@keyframes diamondSpin{to{transform:translate(-50%,-50%) rotate(405deg)}}
+.loading-ring{position:relative;width:80px;height:80px;margin-bottom:2rem;}
+.loading-ring span{position:absolute;inset:0;border:2px solid transparent;border-top-color:var(--red);border-radius:50%;animation:spin 1.2s linear infinite;}
+.loading-ring span:nth-child(2){inset:8px;animation-duration:2s;border-top-color:rgba(230,0,18,.5);}
+.loading-ring span:nth-child(3){inset:16px;animation-duration:3s;border-top-color:rgba(230,0,18,.3);}
 .loading-text{font-size:.9rem;letter-spacing:.5em;text-transform:uppercase;color:var(--red);}
-.loading-bar{width:200px;height:2px;background:rgba(245,245,245,.1);margin-top:1.5rem;overflow:hidden;}
-.loading-bar-fill{height:100%;background:var(--red);width:0;animation:loadFill 2.5s ease-in-out forwards;}
-@keyframes loadFill{to{width:100%}}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 /* ═══════════ HERO ═══════════ */
 .hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden;}
@@ -90,12 +79,6 @@ img{max-width:100%;display:block;}
 .hero-title{font-size:clamp(3rem,10vw,7rem);font-weight:900;line-height:.95;text-transform:uppercase;}
 .hero-title .outline{-webkit-text-stroke:2px var(--white);color:transparent;}
 .hero-title .red{color:var(--red);}
-
-/* P5X LOGO */
-.p5x-logo{display:inline-flex;align-items:center;gap:.3rem;margin-bottom:1rem;position:relative;}
-.p5x-logo-text{font-family:'Bebas Neue','Oswald',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:400;letter-spacing:.12em;font-style:italic;position:relative;color:var(--white);text-shadow:3px 3px 0 var(--red),6px 6px 0 rgba(230,0,18,.3);}
-.p5x-logo-text .p5x-slash{position:absolute;top:-10px;right:-15px;width:4px;height:130%;background:var(--red);transform:rotate(-18deg);transform-origin:bottom right;box-shadow:0 0 8px rgba(230,0,18,.6);}
-.p5x-logo-sub{font-family:'Oswald',sans-serif;font-size:.65rem;letter-spacing:.45em;text-transform:uppercase;color:var(--red);margin-left:.8rem;padding-top:.3rem;font-weight:700;}
 .hero-subtitle{font-size:1.2rem;font-weight:300;color:rgba(245,245,245,.6);margin-top:1rem;letter-spacing:.1em;}
 .hero-desc{font-size:.9rem;line-height:1.8;color:rgba(245,245,245,.5);margin-top:1.5rem;}
 .hero-tags{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;}
@@ -108,11 +91,6 @@ img{max-width:100%;display:block;}
 
 /* ═══════════ SECTION ═══════════ */
 .section{position:relative;padding:5rem 0;}
-.section::before{content:'';position:absolute;top:0;left:0;right:0;height:40px;background:linear-gradient(135deg,var(--black) 33.33%,transparent 33.33%),linear-gradient(225deg,var(--black) 33.33%,transparent 33.33%);background-size:40px 40px;z-index:2;}
-.section.slash-red::before{background:linear-gradient(135deg,var(--red) 33.33%,transparent 33.33%),linear-gradient(225deg,var(--red) 33.33%,transparent 33.33%);background-size:40px 40px;opacity:.15;}
-.section-slash{position:relative;height:60px;overflow:hidden;}
-.section-slash::before{content:'';position:absolute;top:0;left:-5%;width:110%;height:100%;background:repeating-linear-gradient(-45deg,transparent,transparent 8px,var(--red) 8px,var(--red) 10px);opacity:.12;}
-.section-slash::after{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:var(--red);transform:skewY(-2deg);opacity:.3;}
 .section-inner{padding:0 8vw;}
 .section-label{font-size:.65rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem;}
 .section-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;line-height:1.1;letter-spacing:-.02em;}
@@ -142,17 +120,13 @@ img{max-width:100%;display:block;}
 .gallery-item:hover .overlay{transform:translateY(0);}
 .gallery-item .overlay .label{font-size:.6rem;letter-spacing:.2em;color:var(--red);text-transform:uppercase;}
 .gallery-item .overlay .title{font-size:.85rem;font-weight:600;margin-top:.2rem;}
-.gallery-item::after{content:'';position:absolute;inset:0;background:var(--red);opacity:0;transition:opacity .15s;pointer-events:none;z-index:2;}
-.gallery-item:hover::after{animation:flashRed .3s ease-out;}
-@keyframes flashRed{0%{opacity:.5}100%{opacity:0}}
 
-/* ═══════════ STORY — MEMENTOS CRYSTAL ═══════════ */
-.story-timeline{position:relative;margin-top:2.5rem;padding-left:2.5rem;}
-.story-timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--red),rgba(230,0,18,.15) 30%,rgba(230,0,18,.15) 70%,var(--red));border-radius:2px;}
-.story-timeline::after{content:'';position:absolute;left:2px;top:0;bottom:0;width:8px;background:linear-gradient(180deg,rgba(230,0,18,.08),transparent 20%,transparent 80%,rgba(230,0,18,.08));filter:blur(3px);}
+/* ═══════════ STORY ═══════════ */
+.story-timeline{position:relative;margin-top:2.5rem;padding-left:2rem;}
+.story-timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--red),rgba(230,0,18,.2),var(--red));}
 .story-chapter{position:relative;margin-bottom:2.5rem;padding-left:2rem;}
-.story-chapter::before{content:'';position:absolute;left:-2.5rem;top:.6rem;width:14px;height:14px;background:var(--red);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);transform:translateX(-4px);transition:all .3s;box-shadow:0 0 8px rgba(230,0,18,.4);}
-.story-chapter:hover::before{box-shadow:0 0 16px rgba(230,0,18,.8);transform:translateX(-4px) scale(1.2);filter:brightness(1.3);}
+.story-chapter::before{content:'';position:absolute;left:-2rem;top:.8rem;width:12px;height:12px;background:var(--red);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);transform:translateX(-5px);}
+.story-chapter:hover::before{box-shadow:0 0 12px var(--red);}
 .story-date{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;}
 .story-title{font-size:clamp(1.2rem,3vw,1.6rem);font-weight:900;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.8rem;}
 .story-title .red{color:var(--red);}
@@ -161,14 +135,6 @@ img{max-width:100%;display:block;}
 .story-text::after{content:'」';color:var(--red);font-size:1rem;}
 .story-tag{display:inline-block;margin-top:.8rem;padding:.25rem .6rem;background:rgba(230,0,18,.1);border:1px solid rgba(230,0,18,.25);font-size:.6rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--red);}
 .story-quote{margin-top:1.2rem;padding:1rem 1.2rem;border-left:3px solid var(--red);background:rgba(230,0,18,.04);font-size:.8rem;line-height:1.8;color:rgba(245,245,245,.5);font-style:italic;}
-
-/* ═══════════ MEMENTOS BACKGROUND ═══════════ */
-.mementos-bg{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
-.mementos-bg::before{content:'';position:absolute;top:-20%;left:-10%;width:60%;height:140%;background:radial-gradient(ellipse at center,rgba(230,0,18,.06) 0%,transparent 70%);filter:blur(60px);animation:mementosFloat 12s ease-in-out infinite alternate;}
-.mementos-bg::after{content:'';position:absolute;bottom:-20%;right:-10%;width:50%;height:120%;background:radial-gradient(ellipse at center,rgba(230,0,18,.04) 0%,transparent 70%);filter:blur(80px);animation:mementosFloat 15s ease-in-out infinite alternate-reverse;}
-@keyframes mementosFloat{0%{transform:translate(0,0) scale(1)}50%{transform:translate(3%,-5%) scale(1.1)}100%{transform:translate(-2%,3%) scale(.95)}}
-.mementos-crystal{position:absolute;width:4px;height:4px;background:var(--red);opacity:.15;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);animation:crystalPulse 4s ease-in-out infinite;}
-@keyframes crystalPulse{0%,100%{opacity:.08;transform:scale(.8)}50%{opacity:.2;transform:scale(1.2)}}
 
 /* ═══════════ SKILLS ═══════════ */
 .skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem;}
@@ -179,64 +145,6 @@ img{max-width:100%;display:block;}
 .skill-desc{font-size:.75rem;color:rgba(245,245,245,.5);margin-top:.5rem;line-height:1.6;}
 .skill-bar{margin-top:1rem;height:4px;background:rgba(245,245,245,.1);overflow:hidden;}
 .skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--dark-red),var(--red));transition:width 1s cubic-bezier(.16,1,.3,1);}
-
-/* ═══════════ RADAR CHART ═══════════ */
-.radar-section{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:2.5rem;}
-.radar-wrap{display:flex;justify-content:center;align-items:center;}
-.radar-svg{width:100%;max-width:380px;}
-.radar-bg{fill:none;stroke:rgba(230,0,18,.15);stroke-width:1;}
-.radar-axis{stroke:rgba(230,0,18,.12);stroke-width:1;}
-.radar-polygon{fill:rgba(230,0,18,.12);stroke:var(--red);stroke-width:2;transition:all .6s cubic-bezier(.16,1,.3,1);}
-.radar-dot{fill:var(--red);filter:drop-shadow(0 0 4px rgba(230,0,18,.8));}
-.radar-label{fill:rgba(245,245,245,.7);font-size:11px;font-weight:700;letter-spacing:.05em;text-anchor:middle;}
-.radar-value{fill:var(--red);font-size:10px;font-weight:900;text-anchor:middle;}
-.radar-stats-list{display:flex;flex-direction:column;gap:1rem;}
-.radar-stat-item{display:flex;align-items:center;gap:1rem;}
-.radar-stat-icon{width:36px;height:36px;background:rgba(230,0,18,.1);border:1px solid rgba(230,0,18,.25);display:flex;align-items:center;justify-content:center;font-size:.9rem;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);flex-shrink:0;}
-.radar-stat-info{flex:1;}
-.radar-stat-name{font-size:.75rem;font-weight:700;letter-spacing:.1em;color:var(--red);}
-.radar-stat-bar{height:4px;background:rgba(245,245,245,.08);margin-top:.3rem;overflow:hidden;}
-.radar-stat-fill{height:100%;background:linear-gradient(90deg,var(--dark-red),var(--red));transition:width 1s cubic-bezier(.16,1,.3,1);}
-.radar-stat-val{font-size:.7rem;font-weight:900;color:var(--red);letter-spacing:.05em;}
-
-/* ═══════════ CALLING CARD ═══════════ */
-.calling-card{position:relative;max-width:520px;margin:2rem auto;background:#f5f0e8;background-image:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(0,0,0,.03) 27px,rgba(0,0,0,.03) 28px);padding:2.5rem 2rem 2rem;color:#1a1a1a;border:none;box-shadow:4px 4px 0 rgba(0,0,0,.15),8px 8px 0 rgba(230,0,18,.08);}
-.calling-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:var(--red);}
-.calling-card::after{content:'';position:absolute;bottom:0;right:0;width:40px;height:40px;background:linear-gradient(135deg,transparent 50%,rgba(230,0,18,.1) 50%);}
-.calling-card-stamp{position:absolute;top:1rem;right:1.5rem;width:60px;height:60px;border:3px solid var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(-15deg);opacity:.7;}
-.calling-card-stamp span{font-size:.55rem;font-weight:900;color:var(--red);text-transform:uppercase;letter-spacing:.1em;text-align:center;line-height:1.2;}
-.calling-card-title{font-size:1.4rem;font-weight:900;color:var(--red);margin-bottom:1rem;letter-spacing:.05em;}
-.calling-card-body{font-size:.9rem;line-height:2;color:#333;}
-.calling-card-body strong{color:var(--red);}
-.calling-card-sig{margin-top:1.5rem;text-align:right;font-size:.8rem;font-weight:700;color:#555;font-style:italic;}
-.calling-card-sig::before{content:'— ';}
-
-/* ═══════════ CONFIDANT ═══════════ */
-.confidant-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-top:2rem;}
-.confidant-card{padding:1rem;background:rgba(10,10,10,.9);border:1px solid rgba(230,0,18,.12);position:relative;overflow:hidden;transition:all .3s;cursor:default;}
-.confidant-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s;}
-.confidant-card:hover::before{transform:scaleX(1);}
-.confidant-card:hover{border-color:var(--red);transform:translateY(-3px);box-shadow:0 8px 24px rgba(230,0,18,.12);}
-.confidant-icon{font-size:1.5rem;margin-bottom:.5rem;}
-.confidant-name{font-size:.8rem;font-weight:700;color:var(--white);letter-spacing:.05em;}
-.confidant-arcana{font-size:.55rem;letter-spacing:.15em;color:var(--red);text-transform:uppercase;margin-top:.2rem;}
-.confidant-rank{display:flex;gap:3px;margin-top:.6rem;}
-.confidant-rank-dot{width:8px;height:8px;background:rgba(245,245,245,.1);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);transition:all .3s;}
-.confidant-rank-dot.filled{background:var(--red);filter:drop-shadow(0 0 3px rgba(230,0,18,.6));}
-.confidant-desc{font-size:.65rem;color:rgba(245,245,245,.4);margin-top:.5rem;line-height:1.5;}
-
-/* ═══════════ CALENDAR ═══════════ */
-.p5-calendar{background:rgba(10,10,10,.9);border:1px solid rgba(230,0,18,.2);border-top:3px solid var(--red);padding:1.5rem;margin-top:2rem;position:relative;}
-.p5-calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid rgba(230,0,18,.15);}
-.p5-calendar-month{font-size:1.1rem;font-weight:900;color:var(--red);letter-spacing:.1em;text-transform:uppercase;}
-.p5-calendar-day{font-size:.65rem;letter-spacing:.15em;color:rgba(245,245,245,.4);text-transform:uppercase;}
-.p5-calendar-events{display:flex;flex-direction:column;gap:.6rem;}
-.p5-calendar-event{display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;background:rgba(230,0,18,.04);border-left:3px solid var(--red);transition:all .3s;}
-.p5-calendar-event:hover{background:rgba(230,0,18,.1);padding-left:1rem;}
-.p5-calendar-date{font-size:.7rem;font-weight:900;color:var(--red);min-width:40px;letter-spacing:.05em;}
-.p5-calendar-event-title{font-size:.75rem;font-weight:600;color:var(--white);}
-.p5-calendar-event-desc{font-size:.6rem;color:rgba(245,245,245,.4);margin-top:.15rem;}
-.p5-calendar-today{position:absolute;top:1rem;right:1.5rem;padding:.2rem .6rem;background:var(--red);font-size:.55rem;font-weight:700;letter-spacing:.1em;color:var(--pure-white);}
 
 /* ═══════════ STATUS ═══════════ */
 .status-panel{background:linear-gradient(180deg,rgba(10,10,10,.95),rgba(230,0,18,.06));border:1px solid rgba(230,0,18,.2);border-top:3px solid var(--red);padding:1.5rem;margin-top:2rem;}
@@ -290,23 +198,10 @@ img{max-width:100%;display:block;}
 .music-btn{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:rgba(230,0,18,.15);border:1px solid rgba(230,0,18,.3);cursor:pointer;transition:all .3s;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);}
 .music-btn:hover{background:rgba(230,0,18,.4);transform:translateX(3px);}
 .music-btn.playing{background:rgba(230,0,18,.4);border-color:var(--red);}
-.music-btn.loading{opacity:.7;pointer-events:none;}
-.music-btn.loading .music-icon{animation:loadingSpin 1s linear infinite;}
-@keyframes loadingSpin{to{transform:rotate(360deg)}}
 .music-icon{font-size:1rem;animation:musicPulse 1.5s ease-in-out infinite paused;}
 .music-btn.playing .music-icon{animation-play-state:running;}
 .music-text{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);}
 @keyframes musicPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
-.music-info{display:flex;align-items:center;gap:.6rem;margin-top:.5rem;opacity:0;transform:translateY(5px);transition:all .3s;}
-.music-player:hover .music-info,.music-btn.playing ~ .music-info{opacity:1;transform:translateY(0);}
-.music-now{font-size:.6rem;font-weight:600;letter-spacing:.08em;color:var(--red);white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis;}
-.music-controls{display:flex;gap:.3rem;}
-.music-controls span{font-size:.7rem;cursor:pointer;padding:.2rem;transition:color .2s;color:rgba(245,245,245,.4);}
-.music-controls span:hover{color:var(--red);}
-
-/* ═══════════ TYPEWRITER ═══════════ */
-.typewriter{overflow:hidden;border-right:2px solid var(--red);white-space:normal;animation:typingCursor .8s step-end infinite;}
-@keyframes typingCursor{from,to{border-color:var(--red)}50%{border-color:transparent}}
 
 /* ═══════════ BACK TO TOP ═══════════ */
 .back-to-top{position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;background:rgba(230,0,18,.15);border:1px solid rgba(230,0,18,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:999;opacity:0;transform:translateY(20px);transition:all .3s;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);}
@@ -352,10 +247,6 @@ img{max-width:100%;display:block;}
   .gallery-grid{grid-template-columns:repeat(2,1fr);}
   .skills-grid{grid-template-columns:1fr 1fr;gap:.5rem;}
   .skill-card{padding:1rem;}
-  .confidant-grid{grid-template-columns:repeat(2,1fr);gap:.5rem;}
-  .radar-section{grid-template-columns:1fr;gap:1.5rem;}
-  .radar-svg{max-width:280px;}
-  .calling-card{margin:1.5rem 1rem;padding:1.5rem 1.2rem;}
   .footer{flex-direction:column;gap:.5rem;text-align:center;}
   .lightbox-prev{left:1rem;}
   .lightbox-next{right:1rem;}
@@ -369,8 +260,6 @@ img{max-width:100%;display:block;}
   .hero-title{font-size:clamp(2rem,18vw,3.5rem);}
   .hero-subtitle{font-size:1rem;}
   .gallery-grid{grid-template-columns:1fr 1fr;gap:.3rem;}
-  .confidant-grid{grid-template-columns:1fr 1fr;gap:.4rem;}
-  .confidant-card{padding:.7rem;}
   .skills-grid{grid-template-columns:1fr;}
   .about-stats{grid-template-columns:1fr 1fr 1fr;}
   .stat{padding:.6rem;}
@@ -395,10 +284,10 @@ img{max-width:100%;display:block;}
   .m-slide::-webkit-scrollbar{display:none;}
   .m-slide{scrollbar-width:none;}
 
-  /* NAV BUTTONS — P5 SKEWED STYLE */
-  .m-nav-btn{position:fixed;top:50%;transform:translateY(-50%) skewX(-12deg);z-index:9997;width:40px;height:32px;background:var(--red);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;border:none;box-shadow:2px 2px 0 rgba(0,0,0,.3);}
-  .m-nav-btn:hover,.m-nav-btn:active{background:#ff1a1a;transform:translateY(-50%) skewX(-12deg) scale(1.08);}
-  .m-nav-btn svg{width:14px;height:14px;fill:#fff;transform:skewX(12deg);}
+  /* NAV BUTTONS */
+  .m-nav-btn{position:fixed;top:50%;transform:translateY(-50%);z-index:9997;width:36px;height:36px;background:rgba(230,0,18,.2);border:1px solid rgba(230,0,18,.35);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);}
+  .m-nav-btn:hover,.m-nav-btn:active{background:rgba(230,0,18,.5);}
+  .m-nav-btn svg{width:14px;height:14px;fill:var(--red);}
   .m-nav-prev{left:10px;}
   .m-nav-next{right:10px;}
   .m-nav-btn.m-hidden{opacity:0;pointer-events:none;}
@@ -664,35 +553,6 @@ img{max-width:100%;display:block;}
     cursor:pointer;
     box-shadow:0 0 6px rgba(230,0,18,.6);
   }
-
-  /* ═══ CONFIDANT SLIDE ═══ */
-  .m-confidant-slide{background:linear-gradient(180deg,var(--dark),var(--black));}
-  .m-confidant-slide .m-slide-inner{padding-bottom:80px;}
-  .m-confidant-slide .section-label{font-size:.55rem;text-align:center;}
-  .m-confidant-slide .section-title{font-size:1.4rem;text-align:center;margin-bottom:1rem;}
-  .m-confidant-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:1;}
-  .m-confidant-card{padding:.8rem;background:rgba(10,10,10,.9);border:1px solid rgba(230,0,18,.12);position:relative;overflow:hidden;transition:all .3s;}
-  .m-confidant-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s;}
-  .m-confidant-card:active::before{transform:scaleX(1);}
-  .m-confidant-card .confidant-icon{font-size:1.2rem;margin-bottom:.3rem;}
-  .m-confidant-card .confidant-name{font-size:.7rem;font-weight:700;color:var(--white);}
-  .m-confidant-card .confidant-arcana{font-size:.5rem;letter-spacing:.12em;color:var(--red);text-transform:uppercase;margin-top:.15rem;}
-  .m-confidant-card .confidant-rank{display:flex;gap:2px;margin-top:.4rem;}
-  .m-confidant-card .confidant-rank-dot{width:6px;height:6px;}
-  .m-confidant-card .confidant-desc{font-size:.55rem;color:rgba(245,245,245,.4);margin-top:.4rem;line-height:1.4;}
-
-  /* ═══ CALENDAR SLIDE ═══ */
-  .m-calendar-slide{background:linear-gradient(180deg,var(--dark),var(--black));}
-  .m-calendar-slide .m-slide-inner{padding-bottom:80px;}
-  .m-calendar-slide .section-label{font-size:.55rem;text-align:center;}
-  .m-calendar-slide .section-title{font-size:1.4rem;text-align:center;margin-bottom:1.2rem;}
-  .m-calendar-events{display:flex;flex-direction:column;gap:.6rem;}
-  .m-calendar-event{display:flex;align-items:flex-start;gap:.8rem;padding:.7rem;background:rgba(230,0,18,.04);border-left:3px solid var(--red);transition:all .3s;}
-  .m-calendar-event:active{background:rgba(230,0,18,.1);padding-left:1rem;}
-  .m-calendar-date{font-size:.7rem;font-weight:900;color:var(--red);min-width:36px;letter-spacing:.05em;flex-shrink:0;}
-  .m-calendar-info{flex:1;}
-  .m-calendar-title{font-size:.75rem;font-weight:600;color:var(--white);}
-  .m-calendar-desc{font-size:.6rem;color:rgba(245,245,245,.4);margin-top:.15rem;line-height:1.4;}
 }
 </style>
 </head>
@@ -700,17 +560,8 @@ img{max-width:100%;display:block;}
 
 <!-- Loading -->
 <div class="loading" id="loading">
-  <div class="loading-eye">
-    <svg viewBox="0 0 120 80">
-      <path class="eye-outline" d="M10,40 Q60,-10 110,40 Q60,90 10,40 Z"/>
-      <circle class="eye-iris" cx="60" cy="40" r="18"/>
-      <circle cx="60" cy="40" r="8" fill="#000"/>
-      <circle cx="54" cy="35" r="3" fill="rgba(255,255,255,.6)"/>
-    </svg>
-    <div class="loading-diamond"></div>
-  </div>
+  <div class="loading-ring"><span></span><span></span><span></span></div>
   <div class="loading-text">Take Your Heart</div>
-  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
 </div>
 
 <!-- Scroll Progress -->
@@ -746,21 +597,14 @@ img{max-width:100%;display:block;}
 
 <!-- Music Player -->
 <div class="music-player" id="musicPlayer">
-  <audio id="bgm" preload="metadata">
-    <source src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/audio/bgm.mp3" type="audio/mpeg">
+  <audio id="bgm" loop preload="auto">
+    <source src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/audio/bgm.mp3" type="audio/mpeg">
   </audio>
   <div class="music-btn" id="musicBtn" onclick="toggleMusic()">
     <div class="music-hex-border">
       <div class="music-hex-inner">
         <span class="music-icon">🎵</span>
       </div>
-    </div>
-  </div>
-  <div class="music-info" id="musicInfo">
-    <div class="music-now" id="musicNow">Full Moon, Full Life</div>
-    <div class="music-controls">
-      <span class="music-prev" onclick="prevTrack()">⏮</span>
-      <span class="music-next" onclick="nextTrack()">⏭</span>
     </div>
   </div>
   <div class="music-volume" id="musicVolume">
@@ -785,14 +629,10 @@ img{max-width:100%;display:block;}
 <!-- ═══════ HERO ═══════ -->
 <section class="hero" id="hero">
   <div class="hero-bg">
-    <img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt="Joker" width="1920" height="1080" decoding="async">
+    <img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt="Joker">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="p5x-logo">
-      <span class="p5x-logo-text">P5X<span class="p5x-slash"></span></span>
-      <span class="p5x-logo-sub">PERSONA 5X</span>
-    </div>
     <p class="hero-label">🎭 Phantom Thieves of Hearts</p>
     <h1 class="hero-title">
       <span class="outline">雨宫</span><br><span class="red">莲</span>
@@ -808,16 +648,13 @@ img{max-width:100%;display:block;}
   <div class="hero-scroll"><span>Scroll</span><div class="line"></div></div>
 </section>
 
-<!-- SLASH DIVIDER -->
-<div class="section-slash"></div>
-
 <!-- ═══════ ABOUT ═══════ -->
 <section class="section" id="about" style="background:rgba(17,17,17,.9);">
   <div class="section-inner">
     <div class="reveal"><p class="section-label">// Phantom Thief Profile</p><h2 class="section-title">怪盗档案 · <span class="red">JOKER</span></h2></div>
     <div class="about-grid">
       <div class="about-image reveal-left">
-        <img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-extra2.jpg" alt="Joker" loading="lazy" width="600" height="800" decoding="async">
+        <img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-extra2.jpg" alt="Joker">
       </div>
       <div class="reveal-right">
         <h3 class="about-name">JOKER<br><span class="red">雨宫莲</span></h3>
@@ -846,13 +683,9 @@ img{max-width:100%;display:block;}
   </div>
 </section>
 
-<!-- SLASH DIVIDER -->
-<div class="section-slash"></div>
-
 <!-- ═══════ STORY ═══════ -->
-<section class="section" id="works" style="background:rgba(17,17,17,.9);position:relative;">
-  <div class="mementos-bg"><div class="mementos-crystal" style="top:15%;left:20%;animation-delay:0s;"></div><div class="mementos-crystal" style="top:45%;left:75%;animation-delay:1s;width:6px;height:6px;"></div><div class="mementos-crystal" style="top:70%;left:35%;animation-delay:2s;"></div><div class="mementos-crystal" style="top:25%;left:60%;animation-delay:0.5s;width:5px;height:5px;"></div><div class="mementos-crystal" style="top:80%;left:85%;animation-delay:1.5s;"></div><div class="mementos-crystal" style="top:55%;left:10%;animation-delay:2.5s;width:3px;height:3px;"></div><div class="mementos-crystal" style="top:10%;left:90%;animation-delay:3s;"></div><div class="mementos-crystal" style="top:90%;left:50%;animation-delay:0.8s;width:5px;height:5px;"></div></div>
-  <div class="section-inner" style="position:relative;z-index:1;">
+<section class="section" id="works" style="background:rgba(17,17,17,.9);">
+  <div class="section-inner">
     <div class="reveal"><p class="section-label">// Joker Chronicle</p><h2 class="section-title">雨宫莲 · <span class="red">物语</span></h2><p class="section-desc">这是我的故事——从一个被贴上「前科」标签的少年，到暗夜中夺回自我的怪盗。</p></div>
     <div class="story-timeline">
       <div class="story-chapter reveal">
@@ -904,9 +737,6 @@ img{max-width:100%;display:block;}
   </div>
 </section>
 
-<!-- SLASH DIVIDER -->
-<div class="section-slash"></div>
-
 <!-- ═══════ MARQUEE ═══════ -->
 <div class="marquee">
   <div class="marquee-track">
@@ -915,84 +745,28 @@ img{max-width:100%;display:block;}
   </div>
 </div>
 
-<!-- SLASH DIVIDER -->
-<div class="section-slash"></div>
-
 <!-- ═══════ GALLERY ═══════ -->
 <section class="section" id="gallery">
   <div class="section-inner">
     <div class="reveal"><p class="section-label">// Joker Gallery</p><h2 class="section-title">雨宫莲 · <span class="red">图鉴</span></h2><p class="section-desc">暗夜假面的各个姿态，每一帧都是怪盗的灵魂。</p></div>
     <div class="gallery-grid">
-      <div class="gallery-item reveal" onclick="openLightbox(0)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">🎭 HERO</div><div class="title">暗夜假面</div></div></div>
-      <div class="gallery-item reveal" onclick="openLightbox(1)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new2.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">⚡ AWAKENING</div><div class="title">觉醒瞬间</div></div></div>
-      <div class="gallery-item reveal" onclick="openLightbox(2)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new4.jpg" alt="" loading="lazy" width="400" height="300" decoding="async" style="object-position:center center;"><div class="overlay"><div class="label">🃏 WILDCARD</div><div class="title">多面人格</div></div></div>
-      <div class="gallery-item reveal" onclick="openLightbox(3)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-01.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">🌙 PHANTOM</div><div class="title">怪盗姿态</div></div></div>
-      <div class="gallery-item reveal" onclick="openLightbox(4)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-02.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">👤 PROFILE</div><div class="title">档案照</div></div></div>
-      <div class="gallery-item reveal" onclick="openLightbox(5)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/role_joker.png" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">🌟 FULL</div><div class="title">全身立绘</div></div></div>
-      <div class="gallery-item reveal" onclick="openLightbox(6)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero_bg.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">🌃 NIGHT</div><div class="title">暗夜行动</div></div></div>
-      <div class="gallery-item reveal" onclick="openLightbox(7)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-03.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">💥 PERSONA</div><div class="title">Persona觉醒</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(0)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt=""><div class="overlay"><div class="label">🎭 HERO</div><div class="title">暗夜假面</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(1)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new2.jpg" alt=""><div class="overlay"><div class="label">⚡ AWAKENING</div><div class="title">觉醒瞬间</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(2)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new4.jpg" alt="" style="object-position:center center;"><div class="overlay"><div class="label">🃏 WILDCARD</div><div class="title">多面人格</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(3)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-01.jpg" alt=""><div class="overlay"><div class="label">🌙 PHANTOM</div><div class="title">怪盗姿态</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(4)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-02.jpg" alt=""><div class="overlay"><div class="label">👤 PROFILE</div><div class="title">档案照</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(5)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/role_joker.png" alt=""><div class="overlay"><div class="label">🌟 FULL</div><div class="title">全身立绘</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(6)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero_bg.jpg" alt=""><div class="overlay"><div class="label">🌃 NIGHT</div><div class="title">暗夜行动</div></div></div>
+      <div class="gallery-item reveal" onclick="openLightbox(7)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-03.jpg" alt=""><div class="overlay"><div class="label">💥 PERSONA</div><div class="title">Persona觉醒</div></div></div>
     </div>
   </div>
 </section>
-
-<!-- SLASH DIVIDER -->
-<div class="section-slash"></div>
 
 <!-- ═══════ SKILLS ═══════ -->
 <section class="section" id="skills">
   <div class="section-inner">
     <div class="reveal"><p class="section-label">// Joker Abilities</p><h2 class="section-title">雨宫莲 · <span class="red">能力值</span></h2></div>
-
-    <!-- RADAR CHART + STATS -->
-    <div class="radar-section reveal">
-      <div class="radar-wrap">
-        <svg class="radar-svg" viewBox="0 0 400 400">
-          <!-- Background hexagons -->
-          <polygon class="radar-bg" points="200,50 329,125 329,275 200,350 71,275 71,125"/>
-          <polygon class="radar-bg" points="200,100 286,150 286,250 200,300 114,250 114,150" style="opacity:.6"/>
-          <polygon class="radar-bg" points="200,150 243,175 243,225 200,250 157,225 157,175" style="opacity:.3"/>
-          <!-- Axes -->
-          <line class="radar-axis" x1="200" y1="200" x2="200" y2="50"/>
-          <line class="radar-axis" x1="200" y1="200" x2="329" y2="125"/>
-          <line class="radar-axis" x1="200" y1="200" x2="329" y2="275"/>
-          <line class="radar-axis" x1="200" y1="200" x2="200" y2="350"/>
-          <line class="radar-axis" x1="200" y1="200" x2="71" y2="275"/>
-          <line class="radar-axis" x1="200" y1="200" x2="71" y2="125"/>
-          <!-- Data polygon: STR 95, MAG 90, END 88, AGI 96, LUC 85, CHA 92 -->
-          <polygon class="radar-polygon" id="radarPoly" points="200,200 200,200 200,200 200,200 200,200 200,200"/>
-          <!-- Data dots -->
-          <circle class="radar-dot" id="radarDot0" cx="200" cy="200" r="4"/>
-          <circle class="radar-dot" id="radarDot1" cx="200" cy="200" r="4"/>
-          <circle class="radar-dot" id="radarDot2" cx="200" cy="200" r="4"/>
-          <circle class="radar-dot" id="radarDot3" cx="200" cy="200" r="4"/>
-          <circle class="radar-dot" id="radarDot4" cx="200" cy="200" r="4"/>
-          <circle class="radar-dot" id="radarDot5" cx="200" cy="200" r="4"/>
-          <!-- Labels -->
-          <text class="radar-label" x="200" y="38">STR</text>
-          <text class="radar-value" x="200" y="26">95</text>
-          <text class="radar-label" x="345" y="125">MAG</text>
-          <text class="radar-value" x="345" y="113">90</text>
-          <text class="radar-label" x="345" y="285">END</text>
-          <text class="radar-value" x="345" y="297">88</text>
-          <text class="radar-label" x="200" y="375">AGI</text>
-          <text class="radar-value" x="200" y="387">96</text>
-          <text class="radar-label" x="55" y="285">LUC</text>
-          <text class="radar-value" x="55" y="297">85</text>
-          <text class="radar-label" x="55" y="125">CHA</text>
-          <text class="radar-value" x="55" y="113">92</text>
-        </svg>
-      </div>
-      <div class="radar-stats-list">
-        <div class="radar-stat-item"><div class="radar-stat-icon">⚔️</div><div class="radar-stat-info"><div class="radar-stat-name">STR · 力量</div><div class="radar-stat-bar"><div class="radar-stat-fill" data-width="95%"></div></div></div><div class="radar-stat-val">95</div></div>
-        <div class="radar-stat-item"><div class="radar-stat-icon">🔮</div><div class="radar-stat-info"><div class="radar-stat-name">MAG · 魔力</div><div class="radar-stat-bar"><div class="radar-stat-fill" data-width="90%"></div></div></div><div class="radar-stat-val">90</div></div>
-        <div class="radar-stat-item"><div class="radar-stat-icon">🛡️</div><div class="radar-stat-info"><div class="radar-stat-name">END · 耐力</div><div class="radar-stat-bar"><div class="radar-stat-fill" data-width="88%"></div></div></div><div class="radar-stat-val">88</div></div>
-        <div class="radar-stat-item"><div class="radar-stat-icon">💨</div><div class="radar-stat-info"><div class="radar-stat-name">AGI · 敏捷</div><div class="radar-stat-bar"><div class="radar-stat-fill" data-width="96%"></div></div></div><div class="radar-stat-val">96</div></div>
-        <div class="radar-stat-item"><div class="radar-stat-icon">🍀</div><div class="radar-stat-info"><div class="radar-stat-name">LUC · 运气</div><div class="radar-stat-bar"><div class="radar-stat-fill" data-width="85%"></div></div></div><div class="radar-stat-val">85</div></div>
-        <div class="radar-stat-item"><div class="radar-stat-icon">💬</div><div class="radar-stat-info"><div class="radar-stat-name">CHA · 魅力</div><div class="radar-stat-bar"><div class="radar-stat-fill" data-width="92%"></div></div></div><div class="radar-stat-val">92</div></div>
-      </div>
-    </div>
-
-    <div class="skills-grid" style="margin-top:2.5rem;">
+    <div class="skills-grid">
       <div class="skill-card reveal"><div class="skill-icon">🎭</div><div class="skill-name">Persona召唤</div><div class="skill-desc">Wildcard的独有能力，多Persona切换战斗</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="100%"></div></div></div>
       <div class="skill-card reveal"><div class="skill-icon">⚔️</div><div class="skill-name">剑术精通</div><div class="skill-desc">近战格斗与枪械射击的完美结合</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="95%"></div></div></div>
       <div class="skill-card reveal"><div class="skill-icon">🌙</div><div class="skill-name">潜入认知</div><div class="skill-desc">深入扭曲欲望构成的异世界宫殿</div><div class="skill-bar"><div class="skill-bar-fill" style="width:0%" data-width="90%"></div></div></div>
@@ -1005,114 +779,16 @@ img{max-width:100%;display:block;}
   </div>
 </section>
 
-<!-- ═══════ CONFIDANT ═══════ -->
-<section class="section" id="confidant">
-  <div class="section-inner">
-    <div class="reveal"><p class="section-label">// Confidant Bonds</p><h2 class="section-title">怪盗团 · <span class="red">羁绊</span></h2><p class="section-desc">每一段羁绊都是力量的源泉。信赖度越高，能解锁的能力越强。</p></div>
-    <div class="confidant-grid">
-      <div class="confidant-card reveal">
-        <div class="confidant-icon">⚡</div>
-        <div class="confidant-name">坂本龙司</div>
-        <div class="confidant-arcana">战车 · The Chariot</div>
-        <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-        <div class="confidant-desc">暴躁但正义感爆棚的伙伴，怪盗团元老成员</div>
-      </div>
-      <div class="confidant-card reveal">
-        <div class="confidant-icon">🔥</div>
-        <div class="confidant-name">高卷杏</div>
-        <div class="confidant-arcana">女帝 · The Empress</div>
-        <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-        <div class="confidant-desc">外表光鲜的模特，内心燃烧着反抗的火焰</div>
-      </div>
-      <div class="confidant-card reveal">
-        <div class="confidant-icon">🐱</div>
-        <div class="confidant-name">摩尔加纳</div>
-        <div class="confidant-arcana">魔术师 · The Magician</div>
-        <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-        <div class="confidant-desc">会说话的猫，比我更懂异世界的神秘存在</div>
-      </div>
-      <div class="confidant-card reveal">
-        <div class="confidant-icon">🎨</div>
-        <div class="confidant-name">祐介</div>
-        <div class="confidant-arcana">月亮 · The Moon</div>
-        <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-        <div class="confidant-desc">用画笔对抗虚伪艺术的少年画家</div>
-      </div>
-      <div class="confidant-card reveal">
-        <div class="confidant-icon">⚖️</div>
-        <div class="confidant-name">新岛真</div>
-        <div class="confidant-arcana">正义 · Justice</div>
-        <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-        <div class="confidant-desc">背负家族期望却渴望正义的学生会长</div>
-      </div>
-      <div class="confidant-card reveal">
-        <div class="confidant-icon">💻</div>
-        <div class="confidant-name">佐仓双叶</div>
-        <div class="confidant-arcana">隐者 · The Hermit</div>
-        <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-        <div class="confidant-desc">躲在屏幕后面的天才黑客，最强支援</div>
-      </div>
-      <div class="confidant-card reveal">
-        <div class="confidant-icon">🎭</div>
-        <div class="confidant-name">雨宫莲</div>
-        <div class="confidant-arcana">愚者 · The Fool</div>
-        <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-        <div class="confidant-desc">怪盗团团长，拥有无限可能的Wild Card</div>
-      </div>
-      <div class="confidant-card reveal">
-        <div class="confidant-icon">🗝️</div>
-        <div class="confidant-name">佐仓惣治郎</div>
-        <div class="confidant-arcana">法皇 · The Hierophant</div>
-        <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-        <div class="confidant-desc">咖啡店老板，隐藏着不为人知的过去</div>
-      </div>
-    </div>
-
-    <!-- P5 CALENDAR -->
-    <div class="p5-calendar reveal" style="margin-top:2.5rem;">
-      <div class="p5-calendar-today">TODAY</div>
-      <div class="p5-calendar-header">
-        <div class="p5-calendar-month">📅 202X · 关键日期</div>
-        <div class="p5-calendar-day">PERSONA 5X TIMELINE</div>
-      </div>
-      <div class="p5-calendar-events">
-        <div class="p5-calendar-event"><div class="p5-calendar-date">4/11</div><div><div class="p5-calendar-event-title">觉醒 — 误入城堡</div><div class="p5-calendar-event-desc">在去学校的路上迷路，误入鸭志田的城堡，Persona觉醒</div></div></div>
-        <div class="p5-calendar-event"><div class="p5-calendar-date">4/15</div><div><div class="p5-calendar-event-title">怪盗团成立</div><div class="p5-calendar-event-desc">与龙司、摩尔加纳组成心之怪盗团</div></div></div>
-        <div class="p5-calendar-event"><div class="p5-calendar-date">5/1</div><div><div class="p5-calendar-event-title">鸭志田攻略</div><div class="p5-calendar-event-desc">第一个宫殿完成，夺取扭曲的欲望</div></div></div>
-        <div class="p5-calendar-event"><div class="p5-calendar-date">6月</div><div><div class="p5-calendar-event-title">金城银行攻略</div><div class="p5-calendar-event-desc">攻略黑社会大佬的扭曲心灵</div></div></div>
-        <div class="p5-calendar-event"><div class="p5-calendar-date">9/28</div><div><div class="p5-calendar-event-title">被捕 — 陷落</div><div class="p5-calendar-event-desc">被警视厅逮捕，怪盗团被迫解散</div></div></div>
-        <div class="p5-calendar-event"><div class="p5-calendar-date">12/24</div><div><div class="p5-calendar-event-title">最终之战 — 弑神</div><div class="p5-calendar-event-desc">在全市民注视下击败伪神，夺回自由意志</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SLASH DIVIDER -->
-<div class="section-slash"></div>
-
 <!-- ═══════ CONTACT ═══════ -->
 <section class="section" id="contact" style="background:rgba(17,17,17,.9);">
   <div class="section-inner">
     <div class="contact-content">
       <div class="reveal"><p class="section-label">// Calling Card</p><h2 class="section-title">发出<span class="red">预告信</span></h2></div>
-
-      <!-- P5 CALLING CARD -->
-      <div class="calling-card reveal">
-        <div class="calling-card-stamp"><span>PHANTOM<br>THIEVES</span></div>
-        <div class="calling-card-title">预告信 — Calling Card</div>
-        <div class="calling-card-body">
-          致<strong>被扭曲欲望蒙蔽的灵魂</strong>：<br><br>
-          我们将取走你那颗腐朽的心。<br>
-          你以为权力和金钱就是一切？<br>
-          你以为可以永远践踏他人的尊严？<br><br>
-          <strong>你的妄想，到此为止了。</strong><br><br>
-          我们是<strong>心之怪盗团</strong>。<br>
-          只要世界上还有扭曲的欲望，我们就会一直战斗下去。
-        </div>
-        <div class="calling-card-sig">心之怪盗团 · JOKER</div>
+      <div class="dialog reveal">
+        <div class="dialog-header"><div class="dialog-avatar">📮</div><div class="dialog-name">预告信</div></div>
+        <div class="dialog-text">致那些被扭曲欲望蒙蔽的灵魂：我们将取走你腐朽的心。——心之怪盗团</div>
       </div>
-
-      <p class="contact-text reveal" style="text-align:center;margin-top:2rem;">如果你也相信正义不会缺席，欢迎通过以下方式联系。怪盗团随时待命。</p>
+      <p class="contact-text reveal">如果你也相信正义不会缺席，欢迎通过以下方式联系。怪盗团随时待命。</p>
       <div class="contact-links">
         <a href="mailto:joker@phantom.thieves" class="contact-link reveal"><span class="arrow">→</span><span>📧 joker@phantom.thieves</span></a>
         <a href="#" class="contact-link reveal"><span class="arrow">→</span><span>🐦 Twitter / X — @Joker_P5X</span></a>
@@ -1141,22 +817,16 @@ img{max-width:100%;display:block;}
     <div class="m-dot" data-index="3"></div>
     <div class="m-dot" data-index="4"></div>
     <div class="m-dot" data-index="5"></div>
-    <div class="m-dot" data-index="6"></div>
-    <div class="m-dot" data-index="7"></div>
   </div>
 
   <div class="m-slides" id="mSlides">
 
     <!-- ═══ SLIDE 0: HERO ═══ -->
     <div class="m-slide m-hero-slide m-active">
-      <div class="m-hero-bg"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt="" width="800" height="600" decoding="async"></div>
+      <div class="m-hero-bg"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt=""></div>
       <div class="m-hero-overlay"></div>
       <div class="m-slide-inner">
         <div class="m-hero-content">
-          <div class="p5x-logo" style="justify-content:center;">
-            <span class="p5x-logo-text" style="font-size:2.8rem;">P5X<span class="p5x-slash"></span></span>
-            <span class="p5x-logo-sub">PERSONA 5X</span>
-          </div>
           <p class="hero-label">🎭 Phantom Thieves of Hearts</p>
           <h1 class="hero-title"><span class="outline">雨宫</span><br><span class="red">莲</span></h1>
           <p class="hero-subtitle">JOKER — 心之怪盗团团长</p>
@@ -1170,7 +840,7 @@ img{max-width:100%;display:block;}
     <div class="m-slide m-about-slide">
       <div class="m-slide-inner">
         <p class="section-label">// Phantom Thief Profile</p>
-        <img class="m-about-img" src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-extra2.jpg" alt="Joker" loading="lazy" width="400" height="500" decoding="async">
+        <img class="m-about-img" src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-extra2.jpg" alt="Joker">
         <h3 class="m-about-name">JOKER<br><span class="red">雨宫莲</span></h3>
         <p class="m-about-role">🃏 Wildcard · 怪盗团团长</p>
         <p class="m-about-text">作为心之怪盗团的领袖，雨宫莲以「Joker」之名在认知世界中行动。白天是秀尽学园的转校生，夜晚则是潜入异世界的怪盗。他拥有多面人格的力量，能够自如切换不同的Persona。</p>
@@ -1190,7 +860,7 @@ img{max-width:100%;display:block;}
     <div class="m-slide m-story-slide">
       <!-- story sub-slide 0 -->
       <div class="m-story-sub active" data-story="0">
-        <div class="m-story-bg"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt="" loading="lazy" width="800" height="600" decoding="async"></div>
+        <div class="m-story-bg"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt=""></div>
         <div class="m-story-overlay" style="background:linear-gradient(135deg,rgba(0,0,0,.85),rgba(0,0,0,.5) 50%,rgba(230,0,18,.08))"></div>
         <div class="m-story-inner">
           <div class="m-story-head">
@@ -1198,7 +868,7 @@ img{max-width:100%;display:block;}
             <h3 class="m-story-title">踏入<span class="red">秀尽学园</span></h3>
           </div>
           <div class="m-story-body">
-            <div class="m-story-img-wrap"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"></div>
+            <div class="m-story-img-wrap"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt=""></div>
             <p class="m-story-text">因为那件事，我被贴上了「前科者」的标签，被迫转学到秀尽学园。监护人佐仓惣治郎的规则很简单——老实待着，别惹麻烦。我本以为这一年会像死水一样平静。但命运显然不这么想。在去学校的路上，我迷路了，误入了一座诡异的城堡。那里的一切都超出了我的认知——扭曲的欲望化为了现实，而我，觉醒了某种不该存在的力量。</p>
             <div class="m-story-tag">🃏 觉醒</div>
           </div>
@@ -1207,7 +877,7 @@ img{max-width:100%;display:block;}
       </div>
       <!-- story sub-slide 1 -->
       <div class="m-story-sub" data-story="1">
-        <div class="m-story-bg"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-01.jpg" alt="" loading="lazy" width="800" height="600" decoding="async"></div>
+        <div class="m-story-bg"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-01.jpg" alt=""></div>
         <div class="m-story-overlay" style="background:linear-gradient(135deg,rgba(0,0,0,.85),rgba(0,0,0,.5) 50%,rgba(230,0,18,.08))"></div>
         <div class="m-story-inner">
           <div class="m-story-head">
@@ -1215,7 +885,7 @@ img{max-width:100%;display:block;}
             <h3 class="m-story-title">遇见<span class="red">龙司</span></h3>
           </div>
           <div class="m-story-body">
-            <div class="m-story-img-wrap"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-01.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"></div>
+            <div class="m-story-img-wrap"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-01.jpg" alt=""></div>
             <p class="m-story-text">在城堡里，我遇到了坂本龙司——一个暴躁但正义感爆棚的家伙。他被体育老师鸭志田折磨得几乎崩溃。我们一起被困在那个扭曲的空间里，差点丧命。就在那一刻，我体内的Persona彻底觉醒了。亚森——我的第一个Persona，从我碎裂的面具中诞生。我终于明白了：这个世界需要怪盗。</p>
             <div class="m-story-tag">⚡ 亚森觉醒</div>
           </div>
@@ -1224,7 +894,7 @@ img{max-width:100%;display:block;}
       </div>
       <!-- story sub-slide 2 -->
       <div class="m-story-sub" data-story="2">
-        <div class="m-story-bg"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new2.jpg" alt="" loading="lazy" width="800" height="600" decoding="async"></div>
+        <div class="m-story-bg"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new2.jpg" alt=""></div>
         <div class="m-story-overlay" style="background:linear-gradient(135deg,rgba(0,0,0,.85),rgba(0,0,0,.5) 50%,rgba(230,0,18,.08))"></div>
         <div class="m-story-inner">
           <div class="m-story-head">
@@ -1232,7 +902,7 @@ img{max-width:100%;display:block;}
             <h3 class="m-story-title">组建<span class="red">怪盗团</span></h3>
           </div>
           <div class="m-story-body">
-            <div class="m-story-img-wrap"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new2.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"></div>
+            <div class="m-story-img-wrap"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new2.jpg" alt=""></div>
             <p class="m-story-text">一个接一个，志同道合的伙伴聚集到了我身边。高卷杏——那个外表光鲜却内心痛苦的模特；摩尔加纳——一只会说话的猫，却比我更懂异世界；祐介——用画笔对抗虚伪艺术的少年；真——背负家族期望却渴望正义的学生会长；双叶——躲在屏幕后面却拥有最强支援能力的天才黑客。我们成为了「心之怪盗团」，而我，是他们的Joker。</p>
             <div class="m-story-tag">🎭 怪盗团成立</div>
             <div class="m-story-quote">我们不是在犯罪——我们是在夺走那些被扭曲的心，让它们重归真实。如果这世界不给人活路，那就由我们来开辟道路。</div>
@@ -1242,7 +912,7 @@ img{max-width:100%;display:block;}
       </div>
       <!-- story sub-slide 3 -->
       <div class="m-story-sub" data-story="3">
-        <div class="m-story-bg"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-02.jpg" alt="" loading="lazy" width="800" height="600" decoding="async"></div>
+        <div class="m-story-bg"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-02.jpg" alt=""></div>
         <div class="m-story-overlay" style="background:linear-gradient(135deg,rgba(0,0,0,.85),rgba(0,0,0,.5) 50%,rgba(230,0,18,.08))"></div>
         <div class="m-story-inner">
           <div class="m-story-head">
@@ -1250,7 +920,7 @@ img{max-width:100%;display:block;}
             <h3 class="m-story-title">攻略<span class="red">扭曲的欲望</span></h3>
           </div>
           <div class="m-story-body">
-            <div class="m-story-img-wrap"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-02.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"></div>
+            <div class="m-story-img-wrap"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-02.jpg" alt=""></div>
             <p class="m-story-text">每一座宫殿都是一颗扭曲心灵的具象化。鸭志田的城堡、金城的银行、斑目的美术馆、奥村的航天城、冴岛的赌场、狮童的殿堂……每一个敌人都拥有令人窒息的力量。但我们从未退缩。每一次潜入，都是对这个不公世界的宣战。在认知世界里，我能够自如切换Persona——亚森、杰克霜天、经津主、弥赛亚……每一张面具都是我的力量。</p>
             <div class="m-story-tag">💥 宫殿攻略</div>
           </div>
@@ -1259,7 +929,7 @@ img{max-width:100%;display:block;}
       </div>
       <!-- story sub-slide 4 -->
       <div class="m-story-sub" data-story="4">
-        <div class="m-story-bg"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-03.jpg" alt="" loading="lazy" width="800" height="600" decoding="async"></div>
+        <div class="m-story-bg"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-03.jpg" alt=""></div>
         <div class="m-story-overlay" style="background:linear-gradient(135deg,rgba(0,0,0,.85),rgba(0,0,0,.5) 50%,rgba(230,0,18,.08))"></div>
         <div class="m-story-inner">
           <div class="m-story-head">
@@ -1267,7 +937,7 @@ img{max-width:100%;display:block;}
             <h3 class="m-story-title">身陷<span class="red">牢狱</span></h3>
           </div>
           <div class="m-story-body">
-            <div class="m-story-img-wrap"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-03.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"></div>
+            <div class="m-story-img-wrap"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-03.jpg" alt=""></div>
             <p class="m-story-text">我被抓了。警视厅、检察院、甚至是整个体制都在试图压垮我。他们想要一个替罪羊，而我恰好是最合适的人选。在拘留所的日子里，我几乎以为一切都结束了。但怪盗团没有放弃——他们揭露了真正的幕后黑手，向世界展示了真相。我重新戴上了面具，以Joker的姿态回归。这一次，我们的敌人不再是某个扭曲的人心，而是整个腐朽的体制本身。</p>
             <div class="m-story-tag">🔥 逆转</div>
             <div class="m-story-quote">他们以为摘掉我的面具就能让我消失。但他们错了——面具之下，是永远不会屈服的灵魂。</div>
@@ -1277,7 +947,7 @@ img{max-width:100%;display:block;}
       </div>
       <!-- story sub-slide 5 -->
       <div class="m-story-sub" data-story="5">
-        <div class="m-story-bg"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new4.jpg" alt="" loading="lazy" width="800" height="600" decoding="async"></div>
+        <div class="m-story-bg"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new4.jpg" alt=""></div>
         <div class="m-story-overlay" style="background:linear-gradient(135deg,rgba(0,0,0,.85),rgba(0,0,0,.5) 50%,rgba(230,0,18,.08))"></div>
         <div class="m-story-inner">
           <div class="m-story-head">
@@ -1285,7 +955,7 @@ img{max-width:100%;display:block;}
             <h3 class="m-story-title">对抗<span class="red">伪神</span></h3>
           </div>
           <div class="m-story-body">
-            <div class="m-story-img-wrap"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new4.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"></div>
+            <div class="m-story-img-wrap"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new4.jpg" alt=""></div>
             <p class="m-story-text">真正的敌人终于现身——一个妄图支配全人类认知的伪神。它想要剥夺人类的自由意志，把所有人变成行尸走肉。在全东京市民的注视下，怪盗团向伪神发起了最后的挑战。我召唤出了最强大的Persona——撒旦耶尔，以人类之身弑神。当伪神崩塌的那一刻，我知道：我们做到了。不是因为我是英雄，而是因为每个人心中都有不愿屈服的火焰。</p>
             <div class="m-story-tag">🌟 弑神之战</div>
           </div>
@@ -1294,7 +964,7 @@ img{max-width:100%;display:block;}
       </div>
       <!-- story sub-slide 6 -->
       <div class="m-story-sub" data-story="6">
-        <div class="m-story-bg"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/role_joker.png" alt="" loading="lazy" width="800" height="600" decoding="async"></div>
+        <div class="m-story-bg"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/role_joker.png" alt=""></div>
         <div class="m-story-overlay" style="background:linear-gradient(135deg,rgba(0,0,0,.85),rgba(0,0,0,.5) 50%,rgba(230,0,18,.08))"></div>
         <div class="m-story-inner">
           <div class="m-story-head">
@@ -1302,7 +972,7 @@ img{max-width:100%;display:block;}
             <h3 class="m-story-title">回归<span class="red">日常</span></h3>
           </div>
           <div class="m-story-body">
-            <div class="m-story-img-wrap"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/role_joker.png" alt="" loading="lazy" width="400" height="300" decoding="async"></div>
+            <div class="m-story-img-wrap"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/role_joker.png" alt=""></div>
             <p class="m-story-text">春天再次降临。我坐上了返回故乡的列车，看着窗外飞速后退的东京街景。朋友们在车站送别——龙司嚷嚷着要我夏天回来，杏偷偷擦眼泪，真说下次见面要变强给我看。我笑了。这一年，我学会了：即使世界是扭曲的，人心也可以是真实的。摘下面具，我是雨宫莲。戴上面具，我是Joker。但无论哪个身份，我都不会停止战斗。</p>
             <div class="m-story-tag">🎭 永恒的怪盗</div>
             <div class="m-story-quote">我是雨宫莲——心之怪盗团的团长，Joker。只要这个世界上还存在扭曲的欲望，我就会一直戴着这张面具，战斗下去。Take Your Heart.</div>
@@ -1318,14 +988,14 @@ img{max-width:100%;display:block;}
         <p class="section-label">// Joker Gallery</p>
         <h2 class="section-title">雨宫莲 · <span class="red">图鉴</span></h2>
         <div class="m-gallery-grid">
-          <div class="gallery-item" onclick="openLightbox(0)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">🎭 HERO</div><div class="title">暗夜假面</div></div></div>
-          <div class="gallery-item" onclick="openLightbox(1)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new2.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">⚡ AWAKENING</div><div class="title">觉醒瞬间</div></div></div>
-          <div class="gallery-item" onclick="openLightbox(2)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new4.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">🃏 WILDCARD</div><div class="title">多面人格</div></div></div>
-          <div class="gallery-item" onclick="openLightbox(3)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-01.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">🌙 PHANTOM</div><div class="title">怪盗姿态</div></div></div>
-          <div class="gallery-item" onclick="openLightbox(4)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-02.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">👤 PROFILE</div><div class="title">档案照</div></div></div>
-          <div class="gallery-item" onclick="openLightbox(5)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/role_joker.png" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">🌟 FULL</div><div class="title">全身立绘</div></div></div>
-          <div class="gallery-item" onclick="openLightbox(6)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero_bg.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">🌃 NIGHT</div><div class="title">暗夜行动</div></div></div>
-          <div class="gallery-item" onclick="openLightbox(7)"><img src="https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-03.jpg" alt="" loading="lazy" width="400" height="300" decoding="async"><div class="overlay"><div class="label">💥 PERSONA</div><div class="title">Persona觉醒</div></div></div>
+          <div class="gallery-item" onclick="openLightbox(0)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new1.jpg" alt=""><div class="overlay"><div class="label">🎭 HERO</div><div class="title">暗夜假面</div></div></div>
+          <div class="gallery-item" onclick="openLightbox(1)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new2.jpg" alt=""><div class="overlay"><div class="label">⚡ AWAKENING</div><div class="title">觉醒瞬间</div></div></div>
+          <div class="gallery-item" onclick="openLightbox(2)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero-joker-new4.jpg" alt=""><div class="overlay"><div class="label">🃏 WILDCARD</div><div class="title">多面人格</div></div></div>
+          <div class="gallery-item" onclick="openLightbox(3)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-01.jpg" alt=""><div class="overlay"><div class="label">🌙 PHANTOM</div><div class="title">怪盗姿态</div></div></div>
+          <div class="gallery-item" onclick="openLightbox(4)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-02.jpg" alt=""><div class="overlay"><div class="label">👤 PROFILE</div><div class="title">档案照</div></div></div>
+          <div class="gallery-item" onclick="openLightbox(5)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/role_joker.png" alt=""><div class="overlay"><div class="label">🌟 FULL</div><div class="title">全身立绘</div></div></div>
+          <div class="gallery-item" onclick="openLightbox(6)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/hero_bg.jpg" alt=""><div class="overlay"><div class="label">🌃 NIGHT</div><div class="title">暗夜行动</div></div></div>
+          <div class="gallery-item" onclick="openLightbox(7)"><img src="https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/images/work-03.jpg" alt=""><div class="overlay"><div class="label">💥 PERSONA</div><div class="title">Persona觉醒</div></div></div>
         </div>
       </div>
     </div>
@@ -1363,88 +1033,6 @@ img{max-width:100%;display:block;}
           <a href="#" class="contact-link"><span class="arrow">→</span><span>🐦 Twitter / X — @Joker_P5X</span></a>
           <a href="#" class="contact-link"><span class="arrow">→</span><span>📺 Bilibili — 雨宫莲Official</span></a>
           <a href="#" class="contact-link"><span class="arrow">→</span><span>🎨 Pixiv — 作品集</span></a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ SLIDE 6: CONFIDANT ═══ -->
-    <div class="m-slide m-confidant-slide">
-      <div class="m-slide-inner">
-        <p class="section-label">// Confidant Bonds</p>
-        <h2 class="section-title">怪盗团 · <span class="red">羁绊</span></h2>
-        <div class="m-confidant-grid">
-          <div class="m-confidant-card">
-            <div class="confidant-icon">⚡</div>
-            <div class="confidant-name">坂本龙司</div>
-            <div class="confidant-arcana">战车 · The Chariot</div>
-            <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-            <div class="confidant-desc">暴躁但正义感爆棚的伙伴，怪盗团元老成员</div>
-          </div>
-          <div class="m-confidant-card">
-            <div class="confidant-icon">🔥</div>
-            <div class="confidant-name">高卷杏</div>
-            <div class="confidant-arcana">女帝 · The Empress</div>
-            <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-            <div class="confidant-desc">外表光鲜的模特，内心燃烧着反抗的火焰</div>
-          </div>
-          <div class="m-confidant-card">
-            <div class="confidant-icon">🐱</div>
-            <div class="confidant-name">摩尔加纳</div>
-            <div class="confidant-arcana">魔术师 · The Magician</div>
-            <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-            <div class="confidant-desc">会说话的猫，比我更懂异世界的神秘存在</div>
-          </div>
-          <div class="m-confidant-card">
-            <div class="confidant-icon">🎨</div>
-            <div class="confidant-name">祐介</div>
-            <div class="confidant-arcana">月亮 · The Moon</div>
-            <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-            <div class="confidant-desc">用画笔对抗虚伪艺术的少年画家</div>
-          </div>
-          <div class="m-confidant-card">
-            <div class="confidant-icon">⚖️</div>
-            <div class="confidant-name">新岛真</div>
-            <div class="confidant-arcana">正义 · Justice</div>
-            <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-            <div class="confidant-desc">背负家族期望却渴望正义的学生会长</div>
-          </div>
-          <div class="m-confidant-card">
-            <div class="confidant-icon">💻</div>
-            <div class="confidant-name">佐仓双叶</div>
-            <div class="confidant-arcana">隐者 · The Hermit</div>
-            <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-            <div class="confidant-desc">躲在屏幕后面的天才黑客，最强支援</div>
-          </div>
-          <div class="m-confidant-card">
-            <div class="confidant-icon">🎭</div>
-            <div class="confidant-name">雨宫莲</div>
-            <div class="confidant-arcana">愚者 · The Fool</div>
-            <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-            <div class="confidant-desc">怪盗团团长，拥有无限可能的Wild Card</div>
-          </div>
-          <div class="m-confidant-card">
-            <div class="confidant-icon">🗝️</div>
-            <div class="confidant-name">佐仓惣治郎</div>
-            <div class="confidant-arcana">法皇 · The Hierophant</div>
-            <div class="confidant-rank"><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div><div class="confidant-rank-dot filled"></div></div>
-            <div class="confidant-desc">咖啡店老板，隐藏着不为人知的过去</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ SLIDE 7: CALENDAR ═══ -->
-    <div class="m-slide m-calendar-slide">
-      <div class="m-slide-inner">
-        <p class="section-label">// Timeline</p>
-        <h2 class="section-title">P5X · <span class="red">关键日期</span></h2>
-        <div class="m-calendar-events">
-          <div class="m-calendar-event"><div class="m-calendar-date">4/11</div><div class="m-calendar-info"><div class="m-calendar-title">觉醒 — 误入城堡</div><div class="m-calendar-desc">在去学校的路上迷路，误入鸭志田的城堡，Persona觉醒</div></div></div>
-          <div class="m-calendar-event"><div class="m-calendar-date">4/15</div><div class="m-calendar-info"><div class="m-calendar-title">怪盗团成立</div><div class="m-calendar-desc">与龙司、摩尔加纳组成心之怪盗团</div></div></div>
-          <div class="m-calendar-event"><div class="m-calendar-date">5/1</div><div class="m-calendar-info"><div class="m-calendar-title">鸭志田攻略</div><div class="m-calendar-desc">第一个宫殿完成，夺取扭曲的欲望</div></div></div>
-          <div class="m-calendar-event"><div class="m-calendar-date">6月</div><div class="m-calendar-info"><div class="m-calendar-title">金城银行攻略</div><div class="m-calendar-desc">攻略黑社会大佬的扭曲心灵</div></div></div>
-          <div class="m-calendar-event"><div class="m-calendar-date">9/28</div><div class="m-calendar-info"><div class="m-calendar-title">被捕 — 陷落</div><div class="m-calendar-desc">被警视厅逮捕，怪盗团被迫解散</div></div></div>
-          <div class="m-calendar-event"><div class="m-calendar-date">12/24</div><div class="m-calendar-info"><div class="m-calendar-title">最终之战 — 弑神</div><div class="m-calendar-desc">在全市民注视下击败伪神，夺回自由意志</div></div></div>
         </div>
       </div>
     </div>
@@ -1502,40 +1090,15 @@ function scrollToSection(id){
   hamburger.classList.remove('open');
 }
 
-// Music Player — Multi-track
+// Music Player
 var bgm=document.getElementById('bgm');
 var musicBtn=document.getElementById('musicBtn');
 var musicVolume=document.getElementById('musicVolume');
 var volumeSlider=document.getElementById('volumeSlider');
-var musicNow=document.getElementById('musicNow');
 var musicPlaying=false;
 var volumeShowTimer=null;
-var currentTrack=0;
-var tracks=[
-  {src:'https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/audio/bgm.mp3',name:'Full Moon, Full Life'},
-  {src:'https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/audio/full_moon_full_life.mp3',name:'Full Moon, Full Life (Instrumental)'},
-  {src:'https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/audio/tofubeats_remix.mp3',name:'星と僕らと (tofubeats Remix)'}
-];
-bgm.volume=0.7;
 
-function loadTrack(i){
-  currentTrack=(i+tracks.length)%tracks.length;
-  musicBtn.classList.add('loading');
-  bgm.src=tracks[currentTrack].src;
-  musicNow.textContent=tracks[currentTrack].name;
-  bgm.load();
-  if(musicPlaying){
-    bgm.play().then(function(){
-      musicBtn.classList.remove('loading');
-    }).catch(function(){
-      musicBtn.classList.remove('loading');
-    });
-  }else{
-    musicBtn.classList.remove('loading');
-  }
-}
-function nextTrack(){loadTrack(currentTrack+1);}
-function prevTrack(){loadTrack(currentTrack-1);}
+bgm.volume=0.7;
 
 function toggleMusic(){
   if(musicPlaying){
@@ -1543,14 +1106,9 @@ function toggleMusic(){
     musicBtn.classList.remove('playing');
     musicVolume.classList.remove('show');
   }else{
-    musicBtn.classList.add('loading');
-    bgm.play().then(function(){
-      musicBtn.classList.remove('loading');
-      musicBtn.classList.add('playing');
-      showVolume();
-    }).catch(function(){
-      musicBtn.classList.remove('loading');
-    });
+    bgm.play();
+    musicBtn.classList.add('playing');
+    showVolume();
   }
   musicPlaying=!musicPlaying;
 }
@@ -1568,6 +1126,7 @@ function setVolume(val){
   showVolume();
 }
 
+// 点击按钮外部关闭音量条
 document.addEventListener('click',function(e){
   if(!e.target.closest('.music-player')){
     musicVolume.classList.remove('show');
@@ -1586,26 +1145,6 @@ document.addEventListener('click',function initMusic(){
   document.removeEventListener('click',initMusic);
 },{once:true});
 
-// Typewriter effect for story quotes
-(function(){
-  var twObs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting&&!e.target.dataset.tw){
-        e.target.dataset.tw='1';
-        var text=e.target.textContent;
-        e.target.textContent='';
-        e.target.style.borderRight='2px solid var(--red)';
-        var i=0;
-        var timer=setInterval(function(){
-          if(i<text.length){e.target.textContent+=text.charAt(i);i++;}
-          else{clearInterval(timer);setTimeout(function(){e.target.style.borderRight='none'},1500);}
-        },30);
-      }
-    });
-  },{threshold:.5});
-  document.querySelectorAll('.story-quote').forEach(function(el){twObs.observe(el)});
-})();
-
 // Reveal
 var reveals=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
 var obs=new IntersectionObserver(function(entries){
@@ -1614,44 +1153,13 @@ var obs=new IntersectionObserver(function(entries){
       e.target.classList.add('visible');
       e.target.querySelectorAll('.stat-fill[data-width]').forEach(function(b){setTimeout(function(){b.style.width=b.dataset.width},200)});
       e.target.querySelectorAll('.skill-bar-fill[data-width]').forEach(function(b){setTimeout(function(){b.style.width=b.dataset.width},300)});
-      e.target.querySelectorAll('.radar-stat-fill[data-width]').forEach(function(b){setTimeout(function(){b.style.width=b.dataset.width},400)});
     }
   });
 },{threshold:.15,rootMargin:'0px 0px -30px 0px'});
 reveals.forEach(function(el){obs.observe(el)});
 
-// Radar Chart Animation
-(function(){
-  var data=[95,90,88,96,85,92];
-  var cx=200,cy=200,maxR=140;
-  var angles=[-90,-30,30,90,150,210];
-  var radarObs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        var pts=[];
-        for(var i=0;i<6;i++){
-          var r=maxR*(data[i]/100);
-          var rad=angles[i]*Math.PI/180;
-          var px=cx+r*Math.cos(rad);
-          var py=cy+r*Math.sin(rad);
-          pts.push(px.toFixed(1)+','+py.toFixed(1));
-          var dot=document.getElementById('radarDot'+i);
-          if(dot){dot.setAttribute('cx',px.toFixed(1));dot.setAttribute('cy',py.toFixed(1));}
-        }
-        document.getElementById('radarPoly').setAttribute('points',pts.join(' '));
-        // Animate stat bars
-        e.target.querySelectorAll('.radar-stat-fill[data-width]').forEach(function(b){
-          setTimeout(function(){b.style.width=b.dataset.width},400);
-        });
-      }
-    });
-  },{threshold:.3});
-  var skillsEl=document.getElementById('skills');
-  if(skillsEl)radarObs.observe(skillsEl);
-})();
-
 // Lightbox
-var CDN='https://gcore.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/';
+var CDN='https://cdn.jsdelivr.net/gh/HUSE123451/joker-portfolio@main/';
 var lightboxImages=[
   CDN+'images/hero-joker-new1.jpg',CDN+'images/hero-joker-new2.jpg',CDN+'images/hero-joker-new4.jpg',
   CDN+'images/work-01.jpg',CDN+'images/work-02.jpg',CDN+'images/role_joker.png',
